@@ -1,9 +1,9 @@
 import { View, Text, TouchableOpacity, ScrollView, Button } from "react-native";
 import React, { useState } from "react";
-import { Header } from "../../components";
-import SearchModal from "../../components/SearchModal";
+import { Header, SearchModal, ProductCard, Footer } from "../../components";
 import { colors, defaultStyle } from "../../styles/styles";
 import { Avatar } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 
 const categories = [
   {
@@ -37,7 +37,7 @@ const products = [
     name: "Product 1",
     images: [
       {
-        url: "https://atlas-content-cdn.pixelsquid.com/assets_v2/246/2461903618920420852/jpeg-600/G03.jpg?modifiedAt=1",
+        url: "https://www.pngall.com/wp-content/uploads/12/Macbook-PNG-Image-File.png",
       },
     ],
     price: 100,
@@ -47,7 +47,7 @@ const products = [
     name: "Product 2",
     images: [
       {
-        url: "https://atlas-content-cdn.pixelsquid.com/assets_v2/246/2461903618920420852/jpeg-600/G03.jpg?modifiedAt=1",
+        url: "https://www.pngall.com/wp-content/uploads/12/Macbook-PNG-Image-File.png",
       },
     ],
     price: 200,
@@ -56,6 +56,7 @@ const products = [
 ];
 
 const Home = () => {
+  const navigate = useNavigation();
   const [category, setCategory] = useState("");
   // const [categories, setCategories] = useState([]);
   const [activeSearch, setActiveSearch] = useState(false);
@@ -63,6 +64,10 @@ const Home = () => {
 
   const categoryButtonHandler = (id) => () => {
     setCategory(id);
+  };
+
+  const addToCartHandler = (id) => () => {
+    console.log("Add to cart clicked", id);
   };
 
   return (
@@ -140,8 +145,23 @@ const Home = () => {
               );
             })}
           </ScrollView>
-
-          {/* Products */}
+        </View>
+        {/* Products */}
+        <View style={{ flex: 1 }}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {products.map((item, index) => (
+              <ProductCard
+                stock={item.stock}
+                name={item.name}
+                price={item.price}
+                image={item.images[0]?.url}
+                addToCartHandler={addToCartHandler(item._id)}
+                key={item._id}
+                i={index}
+                navigate={navigate}
+              />
+            ))}
+          </ScrollView>
         </View>
       </View>
       {activeSearch && (
@@ -152,6 +172,7 @@ const Home = () => {
           products={products}
         />
       )}
+      <Footer activeRoute={"home"} />
     </>
   );
 };
