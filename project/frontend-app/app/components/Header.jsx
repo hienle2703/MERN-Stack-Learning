@@ -1,4 +1,4 @@
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import React from "react";
 import { Avatar } from "react-native-paper";
 import { colors } from "../styles/styles";
@@ -15,7 +15,7 @@ const Header = ({ back, emptyCart = false }) => {
   };
 
   return (
-    <>
+    <View style={{ paddingHorizontal: 35 }}>
       {back && (
         <TouchableOpacity
           style={{ position: "absolute", left: 20, zIndex: 10 }}
@@ -25,7 +25,7 @@ const Header = ({ back, emptyCart = false }) => {
             style={{ backgroundColor: colors.color4 }}
             icon={"arrow-left"}
             color={
-              route.name === "productdetails" ? colors.color2 : colors.color3
+              route.name === "ProductDetails" ? colors.color2 : colors.color3
             }
           />
         </TouchableOpacity>
@@ -38,11 +38,11 @@ const Header = ({ back, emptyCart = false }) => {
           style={{ backgroundColor: colors.color4 }}
           icon={emptyCart ? "delete-outline" : "cart-outline"}
           color={
-            route.name === "productdetails" ? colors.color2 : colors.color3
+            route.name === "ProductDetails" ? colors.color2 : colors.color3
           }
         />
       </TouchableOpacity>
-    </>
+    </View>
   );
 };
 

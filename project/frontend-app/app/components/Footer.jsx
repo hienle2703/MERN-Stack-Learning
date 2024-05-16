@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, SafeAreaView } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { colors } from "../styles/styles";
@@ -35,13 +35,12 @@ const Footer = ({ activeRoute = "home" }) => {
   };
 
   return (
-    <SafeAreaView
+    <View
       style={{
         backgroundColor: colors.color1,
         borderTopLeftRadius: 120,
         borderTopRightRadius: 120,
       }}
-      edge={["bottom", "top"]}
     >
       <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
         <TouchableOpacity
@@ -96,7 +95,7 @@ const Footer = ({ activeRoute = "home" }) => {
           </TouchableOpacity>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

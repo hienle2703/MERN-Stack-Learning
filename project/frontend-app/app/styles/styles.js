@@ -11,16 +11,16 @@ export const colors = {
   color6: "#f7f7f7",
 };
 
-export const defaultStyle = StyleSheet.create({
-  padding: 35,
+export const defaultStyle = {
+  // padding: 35,
   paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   flex: 1,
   backgroundColor: colors.color2,
-});
+};
 
-export const inputStyling = StyleSheet.create({
+export const inputStyling = {
   height: 50,
   backgroundColor: colors.color2,
   marginVertical: 10,
   marginHorizontal: 20,
-});
+};

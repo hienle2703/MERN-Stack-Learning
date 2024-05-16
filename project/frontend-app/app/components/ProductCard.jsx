@@ -38,10 +38,10 @@ const ProductCard = ({
       >
         <Image
           source={{ uri: image }}
+          resizeMode="contain"
           style={{
             width: "100%",
             height: 200,
-            resizeMode: "contain",
             position: "absolute",
             left: 50,
             top: 105,

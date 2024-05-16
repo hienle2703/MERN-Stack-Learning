@@ -64,7 +64,7 @@ const SearchModal = ({
                 name={item.name}
                 price={item.price}
                 handler={() =>
-                  navigation.navigate("productdetails", { product: item._id })
+                  navigation.navigate("ProductDetails", { id: item._id })
                 }
               />
             );
@@ -101,11 +101,12 @@ const SearchItem = ({ price, name, imgSrc, handler }) => {
     >
       <Image
         source={{ uri: imgSrc }}
+        resizeMode="contain"
         style={{
           width: 80,
           height: 80,
           position: "absolute",
-          resizeMode: "contain",
+
           left: 10,
           borderTopLeftRadius: 20,
           borderBottomRightRadius: 20,

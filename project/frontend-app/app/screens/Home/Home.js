@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, ScrollView, Button } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import React, { useState } from "react";
 import { Header, SearchModal, ProductCard, Footer } from "../../components";
 import { colors, defaultStyle } from "../../styles/styles";
@@ -15,7 +15,7 @@ const categories = [
     category: "Nice2",
   },
   {
-    i_idd: "9128309283098",
+    _id: "9128309283098",
     category: "Nice3",
   },
   {
@@ -27,7 +27,7 @@ const categories = [
     category: "Nice5",
   },
   {
-    i_idd: "91283083098",
+    _id: "91283083098",
     category: "Nice6",
   },
 ];
@@ -72,7 +72,7 @@ const Home = () => {
 
   return (
     <>
-      <View style={{ ...defaultStyle, flex: 1 }}>
+      <View style={{ ...defaultStyle }}>
         <Header />
         <View
           style={{
@@ -80,6 +80,7 @@ const Home = () => {
             paddingTop: 70,
             justifyContent: "space-between",
             alignItems: "center",
+            paddingHorizontal: 35,
           }}
         >
           <View>
@@ -117,7 +118,7 @@ const Home = () => {
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ alignItems: "center" }}
+            contentContainerStyle={{ alignItems: "center", paddingLeft: 20 }}
           >
             {categories.map((item, index) => {
               return (
@@ -148,16 +149,21 @@ const Home = () => {
         </View>
         {/* Products */}
         <View style={{ flex: 1 }}>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ paddingLeft: 10 }}
+          >
             {products.map((item, index) => (
               <ProductCard
+                key={index}
                 stock={item.stock}
                 name={item.name}
                 price={item.price}
                 image={item.images[0]?.url}
                 addToCartHandler={addToCartHandler(item._id)}
-                key={item._id}
                 i={index}
+                id={item._id}
                 navigate={navigate}
               />
             ))}
