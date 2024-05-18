@@ -68,7 +68,9 @@ const ProductDetails = () => {
         style={{ ...defaultStyle, padding: 0, backgroundColor: colors.color1 }}
       >
         <Header back />
+
         <Carousel
+          // containerCustomStyle={{ pointerEvents: "none" }}
           layout={"default"}
           sliderWidth={SLIDER_WIDTH}
           itemWidth={ITEM_WIDTH}
@@ -173,5 +175,15 @@ const styles = StyleSheet.create({
     height: 250,
   },
 });
+
+export const iconOptions = {
+  size: 20,
+  style: {
+    backgroundColor: colors.color5,
+    borderRadius: 5,
+    height: 25,
+    width: 25,
+  },
+};
 
 export default ProductDetails;

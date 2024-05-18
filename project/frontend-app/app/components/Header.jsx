@@ -1,4 +1,4 @@
-import { TouchableOpacity, View } from "react-native";
+import { Pressable, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { Avatar } from "react-native-paper";
 import { colors } from "../styles/styles";
@@ -11,16 +11,20 @@ const Header = ({ back, emptyCart = false }) => {
   const emptyCartHandler = () => console.log("Empty Cart!");
 
   const onPressCart = () => {
-    emptyCart ? emptyCartHandler() : navigation.navigate("cart");
+    emptyCart ? emptyCartHandler() : navigation.navigate("Cart");
   };
 
   return (
-    <View style={{ paddingHorizontal: 35 }}>
+    <View
+      style={{
+        paddingHorizontal: 20,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: back ? "space-between" : "flex-end",
+      }}
+    >
       {back && (
-        <TouchableOpacity
-          style={{ position: "absolute", left: 20, zIndex: 10 }}
-          onPress={() => navigation.goBack()}
-        >
+        <Pressable onPress={() => navigation.goBack()}>
           <Avatar.Icon
             style={{ backgroundColor: colors.color4 }}
             icon={"arrow-left"}
@@ -28,12 +32,9 @@ const Header = ({ back, emptyCart = false }) => {
               route.name === "ProductDetails" ? colors.color2 : colors.color3
             }
           />
-        </TouchableOpacity>
+        </Pressable>
       )}
-      <TouchableOpacity
-        style={{ position: "absolute", right: 20, zIndex: 10 }}
-        onPress={onPressCart}
-      >
+      <TouchableOpacity onPress={onPressCart}>
         <Avatar.Icon
           style={{ backgroundColor: colors.color4 }}
           icon={emptyCart ? "delete-outline" : "cart-outline"}
