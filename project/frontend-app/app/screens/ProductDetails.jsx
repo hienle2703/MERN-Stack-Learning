@@ -77,17 +77,14 @@ const ProductDetails = () => {
   };
 
   return (
-    <View
-      style={{
-        ...defaultStyle,
-        padding: 0,
-        backgroundColor: colors.color1,
-        zIndex: 1,
-      }}
-    >
-      <Header back />
-      <View style={{ marginTop: 30, flex: 1 }}>
+    <>
+      <View
+        style={{ ...defaultStyle, padding: 0, backgroundColor: colors.color1 }}
+      >
+        <Header back />
+
         <Carousel
+          // containerCustomStyle={{ pointerEvents: "none" }}
           layout={"default"}
           sliderWidth={SLIDER_WIDTH}
           itemWidth={ITEM_WIDTH}
@@ -184,7 +181,7 @@ const ProductDetails = () => {
           </Pressable>
         </View>
       </View>
-    </View>
+</>
   );
 };
 
@@ -205,5 +202,15 @@ const styles = StyleSheet.create({
     marginVertical: 35,
   },
 });
+
+export const iconOptions = {
+  size: 20,
+  style: {
+    backgroundColor: colors.color5,
+    borderRadius: 5,
+    height: 25,
+    width: 25,
+  },
+};
 
 export default ProductDetails;

@@ -1,6 +1,12 @@
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import React, { useState } from "react";
-import { Header, SearchModal, ProductCard, Footer } from "../../components";
+import {
+  Header,
+  SearchModal,
+  ProductCard,
+  Footer,
+  Heading,
+} from "../../components";
 import { colors, defaultStyle } from "../../styles/styles";
 import { Avatar } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
@@ -77,16 +83,13 @@ const Home = () => {
         <View
           style={{
             flexDirection: "row",
-            paddingTop: 70,
+            paddingTop: 20,
             justifyContent: "space-between",
             alignItems: "center",
             paddingHorizontal: 35,
           }}
         >
-          <View>
-            <Text style={{ fontSize: 25 }}>Our</Text>
-            <Text style={{ fontSize: 25, fontWeight: "900" }}>Products</Text>
-          </View>
+          <Heading />
           <TouchableOpacity onPress={() => setActiveSearch((prev) => !prev)}>
             <Avatar.Icon
               icon={"magnify"}
