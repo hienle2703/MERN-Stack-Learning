@@ -4,8 +4,9 @@ import React from "react";
 import { colors, defaultStyle } from "../styles/styles";
 import { CartItem, Header, Heading } from "../components";
 import { Button } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 
-const cartItems = [
+export const cartItems = [
   {
     name: "Macbook",
     image:
@@ -26,9 +27,16 @@ const cartItems = [
   },
 ];
 const Cart = () => {
+  const navigation = useNavigation();
+
   const increaseHandler = () => {};
 
   const decreaseHandler = () => {};
+
+  const onCheckout = () => {
+    console.log(cartItems.length > 0)
+    cartItems.length > 0 ? navigation.navigate("ConfirmOrder") : null;
+  };
 
   return (
     <View style={{ ...defaultStyle }}>
@@ -72,7 +80,7 @@ const Cart = () => {
         <Text>$5</Text>
       </View>
 
-      <TouchableOpacity>
+      <TouchableOpacity onPress={onCheckout}>
         <Button
           style={{
             backgroundColor: colors.color3,
