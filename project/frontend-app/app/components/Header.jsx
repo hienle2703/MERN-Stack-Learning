@@ -1,4 +1,4 @@
-import { TouchableOpacity, View } from "react-native";
+import { Pressable, View } from "react-native";
 import React from "react";
 import { Avatar } from "react-native-paper";
 import { colors } from "../styles/styles";
@@ -15,9 +15,9 @@ const Header = ({ back, emptyCart = false }) => {
   };
 
   return (
-    <View style={{ paddingHorizontal: 35 }}>
+    <View style={{ paddingHorizontal: 35, marginBottom: 10 }}>
       {back && (
-        <TouchableOpacity
+        <Pressable
           style={{ position: "absolute", left: 20, zIndex: 10 }}
           onPress={() => navigation.goBack()}
         >
@@ -28,9 +28,9 @@ const Header = ({ back, emptyCart = false }) => {
               route.name === "ProductDetails" ? colors.color2 : colors.color3
             }
           />
-        </TouchableOpacity>
+        </Pressable>
       )}
-      <TouchableOpacity
+      <Pressable
         style={{ position: "absolute", right: 20, zIndex: 10 }}
         onPress={onPressCart}
       >
@@ -41,7 +41,7 @@ const Header = ({ back, emptyCart = false }) => {
             route.name === "ProductDetails" ? colors.color2 : colors.color3
           }
         />
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 };

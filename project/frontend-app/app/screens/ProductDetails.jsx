@@ -11,7 +11,8 @@ import { Header } from "../components";
 import { useRoute } from "@react-navigation/native";
 import { Carousel } from "react-native-snap-carousel";
 import { colors, defaultStyle } from "../styles/styles";
-import { Avatar } from "react-native-paper";
+import { Avatar, Button } from "react-native-paper";
+import Toast from "react-native-toast-message";
 
 const SLIDER_WIDTH = Dimensions.get("window").width;
 const ITEM_WIDTH = SLIDER_WIDTH;
@@ -50,6 +51,19 @@ const ProductDetails = () => {
     setQuantity((prev) => prev + 1);
   };
 
+  const addToCartHandler = () => {
+    if (stock === 0)
+      return Toast.show({
+        type: "error",
+        text1: "Out of stock!",
+        text2: "This is text 2",
+      });
+      return Toast.show({
+        type: "success",
+        text1: "Added to Cart!",
+      });
+  };
+
   const CarouselCardItem = ({ item, index }) => {
     return (
       <View key={index} style={styles.container}>
@@ -63,11 +77,16 @@ const ProductDetails = () => {
   };
 
   return (
-    <>
-      <View
-        style={{ ...defaultStyle, padding: 0, backgroundColor: colors.color1 }}
-      >
-        <Header back />
+    <View
+      style={{
+        ...defaultStyle,
+        padding: 0,
+        backgroundColor: colors.color1,
+        zIndex: 1,
+      }}
+    >
+      <Header back />
+      <View style={{ marginTop: 30, flex: 1 }}>
         <Carousel
           layout={"default"}
           sliderWidth={SLIDER_WIDTH}
@@ -156,21 +175,34 @@ const ProductDetails = () => {
               </Pressable>
             </View>
           </View>
+
+          {/* Add To Cart Button */}
+          <Pressable onPress={addToCartHandler}>
+            <Button icon={"cart"} style={styles.btn} textColor={colors.color2}>
+              Add To Cart
+            </Button>
+          </Pressable>
         </View>
       </View>
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     width: ITEM_WIDTH,
-    paddingVertical: 40,
+    marginVertical: 40,
     height: 380,
   },
   image: {
     width: ITEM_WIDTH,
-    height: 250,
+    height: 280,
+  },
+  btn: {
+    backgroundColor: colors.color3,
+    borderRadius: 100,
+    padding: 5,
+    marginVertical: 35,
   },
 });
 
