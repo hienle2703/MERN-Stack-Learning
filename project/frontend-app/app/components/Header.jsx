@@ -1,4 +1,4 @@
-import { Pressable, TouchableOpacity, View } from "react-native";
+import { Dimensions, Pressable, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { Avatar } from "react-native-paper";
 import { colors } from "../styles/styles";
@@ -17,7 +17,7 @@ const Header = ({ back, emptyCart = false }) => {
   return (
     <View
       style={{
-        paddingHorizontal: 20,
+        // paddingHorizontal: 20,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: back ? "space-between" : "flex-end",

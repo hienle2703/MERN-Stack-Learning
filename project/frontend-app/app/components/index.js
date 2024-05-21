@@ -6,6 +6,8 @@ import Heading from "./Heading";
 import CartItem from "./CartItem";
 import ConfirmOrderItem from "./ConfirmOrderItem";
 import Loader from "./Loader";
+import ButtonBox from "./ButtonBox";
+import OrderItem from "./OrderItem";
 
 export {
   Header,
@@ -16,4 +18,6 @@ export {
   CartItem,
   ConfirmOrderItem,
   Loader,
+  ButtonBox,
+  OrderItem,
 };

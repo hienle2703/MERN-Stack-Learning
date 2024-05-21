@@ -10,8 +10,8 @@ const Footer = ({ activeRoute = "home" }) => {
 
   // const { loading, isAuthenticated } = useSelector((state) => state.user);
 
-  const isAuthenticated = false
-  const loading = false
+  const isAuthenticated = true;
+  const loading = false;
 
   const navigatationHandler = (key) => {
     switch (key) {
@@ -74,11 +74,11 @@ const Footer = ({ activeRoute = "home" }) => {
             <Avatar.Icon
               {...avatarOptions}
               icon={
-                isAuthenticated === false
+                !isAuthenticated
                   ? "login"
                   : activeRoute === "Profile"
-                  ? "account"
-                  : "account-outline"
+                    ? "account"
+                    : "account-outline"
               }
             />
           </TouchableOpacity>
