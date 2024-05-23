@@ -38,7 +38,7 @@ const categories = [
   },
 ];
 
-const products = [
+export const products = [
   {
     name: "Product 1",
     images: [
@@ -48,6 +48,8 @@ const products = [
     ],
     price: 100,
     _id: "iuoiufoiauef",
+    category: "Macbook",
+    stock: 1000,
   },
   {
     name: "Product 2",
@@ -58,6 +60,8 @@ const products = [
     ],
     price: 200,
     _id: "123123123",
+    category: "Macbook Pro",
+    stock: 1000,
   },
 ];
 

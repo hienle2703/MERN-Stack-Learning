@@ -8,6 +8,7 @@ import ConfirmOrderItem from "./ConfirmOrderItem";
 import Loader from "./Loader";
 import ButtonBox from "./ButtonBox";
 import OrderItem from "./OrderItem";
+import Chart from "./Chart";
 
 export {
   Header,
@@ -20,4 +21,5 @@ export {
   Loader,
   ButtonBox,
   OrderItem,
+  Chart,
 };
