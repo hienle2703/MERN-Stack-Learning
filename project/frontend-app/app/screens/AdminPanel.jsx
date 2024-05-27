@@ -23,23 +23,23 @@ const AdminPanel = ({ navigation }) => {
   //   );
 
   const loading = false;
-  const inStock = true;
-  const outOfStock = true;
+  const inStock = 12;
+  const outOfStock = 2;
 
   const navigationHandler = (text) => {
     switch (text) {
       case "Category":
-        navigation.navigate("categories");
+        navigation.navigate("Categories");
         break;
       case "All Orders":
-        navigation.navigate("adminorders");
+        navigation.navigate("AdminOrders");
         break;
       case "Product":
-        navigation.navigate("newproduct");
+        navigation.navigate("NewProduct");
         break;
 
       default:
-        navigation.navigate("adminorders");
+        navigation.navigate("AdminOrders");
         break;
     }
   };

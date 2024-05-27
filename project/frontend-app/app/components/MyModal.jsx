@@ -25,7 +25,7 @@ const MyModal = ({ id, deleteHandler, navigate, setOpenModal }) => {
 
       <Text
         style={styles.text}
-        onPress={() => navigate.navigate("updateproduct", { id })}
+        onPress={() => navigate.navigate("UpdateProduct", { id })}
       >
         Edit
       </Text>

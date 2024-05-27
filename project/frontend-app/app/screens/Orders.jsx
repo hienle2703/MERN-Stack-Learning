@@ -8,7 +8,7 @@ import OrderItem from "../components/OrderItem";
 // import { useGetOrders } from "../utils/hooks";
 // import { useIsFocused } from "@react-navigation/native";
 
-const orders = [
+export const orders = [
   {
     _id: "1",
     shippingInfo: {
