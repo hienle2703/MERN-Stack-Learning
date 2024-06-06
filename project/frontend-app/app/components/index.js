@@ -10,6 +10,7 @@ import ButtonBox from "./ButtonBox";
 import OrderItem from "./OrderItem";
 import Chart from "./Chart";
 import SelectComponent from "./SelectComponent";
+import ImageCard from "./ImageCard";
 
 export {
   Header,
@@ -24,4 +25,5 @@ export {
   OrderItem,
   Chart,
   SelectComponent,
+  ImageCard,
 };
