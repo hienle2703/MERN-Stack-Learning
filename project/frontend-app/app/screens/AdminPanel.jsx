@@ -56,6 +56,8 @@ const AdminPanel = ({ navigation }) => {
   //     getAdminProducts
   //   );
 
+  // Making some changes here
+
   return (
     <View style={{ ...defaultStyle, paddingHorizontal: 20 }}>
       <Header back={true} />
