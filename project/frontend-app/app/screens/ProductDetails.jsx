@@ -5,6 +5,7 @@ import {
   Dimensions,
   Pressable,
   Text,
+  SafeAreaView,
 } from "react-native";
 import React, { useRef, useState } from "react";
 import { Header } from "../components";
@@ -58,10 +59,10 @@ const ProductDetails = () => {
         text1: "Out of stock!",
         text2: "This is text 2",
       });
-      return Toast.show({
-        type: "success",
-        text1: "Added to Cart!",
-      });
+    return Toast.show({
+      type: "success",
+      text1: "Added to Cart!",
+    });
   };
 
   const CarouselCardItem = ({ item, index }) => {
@@ -77,7 +78,7 @@ const ProductDetails = () => {
   };
 
   return (
-    <>
+    <SafeAreaView edges={['bottom']} style={{ flex: 1, backgroundColor: 'yellow'}}>
       <View
         style={{ ...defaultStyle, padding: 0, backgroundColor: colors.color1 }}
       >
@@ -181,7 +182,7 @@ const ProductDetails = () => {
           </Pressable>
         </View>
       </View>
-</>
+    </SafeAreaView>
   );
 };
 

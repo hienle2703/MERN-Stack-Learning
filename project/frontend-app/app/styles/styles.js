@@ -49,6 +49,7 @@ export const formStyles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: "center",
     elevation: 10,
+    marginHorizontal: 35
   },
 
   forget: {

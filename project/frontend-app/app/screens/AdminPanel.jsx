@@ -54,7 +54,7 @@ const AdminPanel = ({ navigation }) => {
   //     null,
   //     null,
   //     getAdminProducts
-  //   );
+  //   );/
 
   // Making some changes here
 

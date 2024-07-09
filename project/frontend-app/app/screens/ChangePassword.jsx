@@ -29,7 +29,7 @@ const ChangePassword = () => {
     <View style={defaultStyle}>
       <Header back={true} />
       {/* Heading */}
-      <View style={{ marginBottom: 20, paddingTop: 70 }}>
+      <View style={{ marginBottom: 20, marginHorizontal: 35, backgroundColor: 'black', borderRadius: 10 }}>
         <Text style={formHeading}>Change Password</Text>
       </View>
 
