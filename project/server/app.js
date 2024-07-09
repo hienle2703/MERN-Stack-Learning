@@ -7,6 +7,9 @@ config({
 
 export const app = express();
 
+// Using Middlewares
+app.use(express.json());
+
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
