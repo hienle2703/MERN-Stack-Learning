@@ -15,7 +15,7 @@ export const sendToken = (user, res, message, statusCode) => {
 };
 
 export const cookieOptions = {
-  secure: process.env.NODE_ENV !== "Development",
-  httpOnly: process.env.NODE_ENV !== "Development",
+  secure: process.env.NODE_ENV === "Production",
+  httpOnly: process.env.NODE_ENV === "Production",
   sameSite: process.env.NODE_ENV !== "Development" ? false : "none",
 };
