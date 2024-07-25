@@ -12,6 +12,47 @@ export const getMyProfile = asyncError(async (req, res, next) => {
   });
 });
 
+export const updateProfile = asyncError(async (req, res, next) => {
+  const user = await User.findById(req.user._id);
+
+  const { name, email, address, city, country, pinCode } = req.body;
+
+  if (name) user.name = name;
+  if (email) user.email = email;
+  if (address) user.address = address;
+  if (city) user.city = city;
+  if (country) user.country = country;
+  if (pinCode) user.pinCode = pinCode;
+
+  await user.save();
+
+  res.status(200).json({
+    success: true,
+    message: "Profile updated successfully",
+  });
+});
+
+export const changePassword = asyncError(async (req, res, next) => {
+  const user = await User.findById(req.user._id).select("+password");
+
+  const { currentPassword, newPassword } = req.body;
+
+  if (!currentPassword || !newPassword)
+    return next(new ErrorHandler("Please enter current and new password", 400));
+
+  const isMatched = await user.comparePassword(currentPassword);
+
+  if (!isMatched) return next(new ErrorHandler("Incorrect Password", 400));
+
+  user.password = newPassword;
+  await user.save();
+
+  res.status(200).json({
+    success: true,
+    message: "Password changed successfully",
+  });
+});
+
 export const logOut = asyncError(async (req, res, next) => {
   res
     .status(200)
