@@ -8,3 +8,10 @@ Trong folder này bao gồm các tính năng của backend
 
 # 4. Authentication Backend
     - JWT + cookies
+
+# 5. Update Profile & Password
+    - Learn put method
+
+# 6. Image Upload API
+    - Learn cloudinary cloud storage
+    - Learn to upload image through multer + datauri (base64 content) + cloudinary uploader

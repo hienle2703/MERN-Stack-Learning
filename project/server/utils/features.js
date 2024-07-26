@@ -1,5 +1,6 @@
 import DataUriParser from "datauri/parser.js";
 import path from "path";
+import { createTransport } from "nodemailer";
 
 export const getDataUri = (file) => {
   const parser = new DataUriParser();
@@ -27,4 +28,21 @@ export const cookieOptions = {
   secure: process.env.NODE_ENV === "Production",
   httpOnly: process.env.NODE_ENV === "Production",
   sameSite: process.env.NODE_ENV !== "Development" ? false : "none",
+};
+
+export const sendEmail = async (subject, to, text) => {
+  var transport = createTransport({
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS
+    }
+  });
+
+  await transport.sendMail({
+    to,
+    subject,
+    text,
+  });
 };
