@@ -15,3 +15,6 @@ Trong folder này bao gồm các tính năng của backend
 # 6. Image Upload API
     - Learn cloudinary cloud storage
     - Learn to upload image through multer + datauri (base64 content) + cloudinary uploader
+
+# 7. Product Backend
+    - Cái Delete Product hay => Xóa images trên cloud rồi mới xóa trong db
