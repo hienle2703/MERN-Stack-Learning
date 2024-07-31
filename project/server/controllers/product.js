@@ -22,8 +22,6 @@ export const getAllProducts = asyncError(async (req, res, next) => {
     category: category ? category : undefined,
   });
 
-  console.log(products, '==========products')
-
   if (!products) return next(new ErrorHandler("Products Not Found", 404));
 
   res.status(200).json({
