@@ -33,9 +33,12 @@ export const getAllProducts = asyncError(async (req, res, next) => {
 export const getAdminProducts = asyncError(async (req, res, next) => {
   const products = await Product.find({}).populate("category"); //.populate("category") => Thay vì trả ra category: "abcxyz" thì nó sẽ lấy nguyên object bên collection Category bỏ vô
 
+  const outOfStock = products.filter((item) => item.stock === 0);
   res.status(200).json({
     success: true,
     products,
+    outOfStock: outOfStock.length,
+    inStock: products.length - outOfStock.length,
   });
 });
 
