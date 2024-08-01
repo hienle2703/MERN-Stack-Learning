@@ -6,9 +6,12 @@ import {
   getMyOrders,
   getOrderDetail,
   processOrder,
+  processPayment,
 } from "../controllers/order.js";
 
 const router = express.Router();
+
+router.post("/payment", isAuthenticated, processPayment);
 
 router.post("/new", isAuthenticated, createNewOrder);
 router.get("/my", isAuthenticated, getMyOrders);

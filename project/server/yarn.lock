@@ -24,6 +24,13 @@
   dependencies:
     sparse-bitfield "^3.0.3"
 
+"@types/node@>=8.1.0":
+  version "22.0.2"
+  resolved "https://registry.npmjs.org/@types/node/-/node-22.0.2.tgz"
+  integrity sha512-yPL6DyFwY5PiMVEwymNeqUTKsDczQBJ/5T7W/46RwLU/VH+AA8aT5TZkvBviLKLbbm0hlfftEkGrNzfRk/fofQ==
+  dependencies:
+    undici-types "~6.11.1"
+
 "@types/webidl-conversions@*":
   version "7.0.3"
   resolved "https://registry.npmjs.org/@types/webidl-conversions/-/webidl-conversions-7.0.3.tgz"
@@ -905,7 +912,7 @@ q@^1.5.1:
   resolved "https://registry.npmjs.org/q/-/q-1.5.1.tgz"
   integrity sha512-kV/CThkXo6xyFEZUugw/+pIOywXcDbFYgSct5cT3gqlbkBE1SJdwy6UQoZvodiWF/ckQLZyDE/Bu1M6gVu5lVw==
 
-qs@6.11.0:
+qs@^6.11.0, qs@6.11.0:
   version "6.11.0"
   resolved "https://registry.npmjs.org/qs/-/qs-6.11.0.tgz"
   integrity sha512-MvjoMCJwEarSbUYk5O+nmoSzSutSsTwF85zcHPQ9OrlFoZOYIjaqBAJIqIXjptyD5vThxGq52Xu/MaJzRkIk4Q==
@@ -1106,6 +1113,14 @@ strip-ansi@^6.0.1:
   dependencies:
     ansi-regex "^5.0.1"
 
+stripe@^16.5.0:
+  version "16.5.0"
+  resolved "https://registry.npmjs.org/stripe/-/stripe-16.5.0.tgz"
+  integrity sha512-5qY2Va8pmnqS/dcKsQKJnk9kkYCtS6hqjN7kktZEmdxVohZHvbT9pOWK8UUKRInTXYkCNl6x505tO5416KLPsQ==
+  dependencies:
+    "@types/node" ">=8.1.0"
+    qs "^6.11.0"
+
 tar@^6.1.11:
   version "6.2.1"
   resolved "https://registry.npmjs.org/tar/-/tar-6.2.1.tgz"
@@ -1147,6 +1162,11 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.npmjs.org/typedarray/-/typedarray-0.0.6.tgz"
   integrity sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==
+
+undici-types@~6.11.1:
+  version "6.11.1"
+  resolved "https://registry.npmjs.org/undici-types/-/undici-types-6.11.1.tgz"
+  integrity sha512-mIDEX2ek50x0OlRgxryxsenE5XaQD4on5U2inY7RApK3SOJpofyw7uW2AyfMKkhAxXIceo2DeWGVGwyvng1GNQ==
 
 unpipe@~1.0.0, unpipe@1.0.0:
   version "1.0.0"
