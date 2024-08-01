@@ -1,6 +1,7 @@
 import { asyncError } from "../middlewares/error.js";
 import { Order } from "../models/order.js";
 import { Product } from "../models/product.js";
+import ErrorHandler from "../utils/error.js";
 
 export const createNewOrder = asyncError(async (req, res, next) => {
   const {
@@ -39,6 +40,15 @@ export const createNewOrder = asyncError(async (req, res, next) => {
   });
 });
 
+export const getAdminOrders = asyncError(async (req, res, next) => {
+  const orders = await Order.find();
+
+  res.status(200).json({
+    success: true,
+    orders,
+  });
+});
+
 export const getMyOrders = asyncError(async (req, res, next) => {
   const orders = await Order.find({ user: req.user._id });
 
@@ -55,6 +65,29 @@ export const getOrderDetail = asyncError(async (req, res, next) => {
 
   res.status(200).json({
     success: true,
+    order,
+  });
+});
+
+export const processOrder = asyncError(async (req, res, next) => {
+  const order = await Order.findById(req.params.id);
+
+  if (!order) return next(new ErrorHandler("Order not found", 404));
+
+  if (order.orderStatus === "PREPARING" || order.orderStatus === undefined) {
+    order.orderStatus = "SHIPPED";
+  } else if (order.orderStatus === "SHIPPED") {
+    order.orderStatus = "DELIVERED";
+    order.deliveredAt = new Date(Date.now());
+  } else {
+    return next(new ErrorHandler("Order already delivered", 400));
+  }
+
+  await order.save();
+
+  res.status(200).json({
+    success: true,
+    message: "Order processed successfully",
     order,
   });
 });
