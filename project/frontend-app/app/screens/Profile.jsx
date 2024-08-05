@@ -107,7 +107,15 @@ const Profile = ({ navigation, route }) => {
         </View>
 
         {loading ? (
-          <Loader />
+          <View
+            style={{
+              marginTop: 50,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Loader size={50} />
+          </View>
         ) : (
           <>
             <View style={styles.container}>

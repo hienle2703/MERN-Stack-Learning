@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import React, { useState } from "react";
 import {
   colors,
@@ -9,27 +9,40 @@ import {
 } from "../styles/styles";
 import { Button, TextInput } from "react-native-paper";
 import Header from "../components/Header";
-// import { useDispatch } from "react-redux";
-// import { updatePassword } from "../redux/actions/otherAction";
-// import { useMessageAndErrorOther } from "../utils/hooks";
+import { useDispatch } from "react-redux";
+import { updatePassword } from "../../redux/actions/otherAction";
+import { useMessageAndErrorUser } from "../utils/hooks";
 
 const ChangePassword = () => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  //   const dispatch = useDispatch();
-  //   const loading = useMessageAndErrorOther(dispatch);
-  const loading = false;
+
+  const dispatch = useDispatch();
+  const loading = useMessageAndErrorUser(dispatch);
 
   const submitHandler = () => {
-    // dispatch(updatePassword(oldPassword, newPassword));
+    dispatch(updatePassword(oldPassword, newPassword));
     setOldPassword("");
     setNewPassword("");
   };
+  
   return (
-    <View style={defaultStyle}>
+    <ScrollView
+      style={[
+        defaultStyle,
+        { marginHorizontal: 20, backgroundColor: colors.color2 },
+      ]}
+      contentContainerStyle={{ paddingBottom: 50 }}
+    >
       <Header back={true} />
       {/* Heading */}
-      <View style={{ marginBottom: 20, marginHorizontal: 35, backgroundColor: 'black', borderRadius: 10 }}>
+      <View
+        style={{
+          marginBottom: 20,
+          backgroundColor: colors.color3,
+          borderRadius: 10,
+        }}
+      >
         <Text style={formHeading}>Change Password</Text>
       </View>
 
@@ -59,7 +72,7 @@ const ChangePassword = () => {
           Change
         </Button>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
