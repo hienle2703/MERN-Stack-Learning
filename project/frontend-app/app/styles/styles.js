@@ -19,7 +19,7 @@ export const defaultStyle = {
 };
 
 export const inputStyling = {
-  height: 50,
+  // height: 50,
   backgroundColor: colors.color2,
   marginVertical: 10,
   marginHorizontal: 20,
@@ -29,7 +29,7 @@ export const formHeading = {
   fontSize: 25,
   fontWeight: "500",
   textAlign: "center",
-  
+
   color: colors.color2,
   padding: 5,
   borderRadius: 10,
@@ -49,7 +49,6 @@ export const formStyles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: "center",
     elevation: 10,
-    marginHorizontal: 35
   },
 
   forget: {

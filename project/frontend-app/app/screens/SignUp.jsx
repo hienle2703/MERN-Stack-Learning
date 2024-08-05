@@ -11,7 +11,9 @@ import {
 import { Avatar, Button, TextInput } from "react-native-paper";
 import Footer from "../components/Footer";
 import mime from "mime";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { register } from "../../redux/actions/userActions";
+import { useMessageAndErrorUser } from "../utils/hooks";
 // import { register } from "../redux/actions/userActions";
 // import { useMessageAndErrorUser } from "../utils/hooks";
 
@@ -25,7 +27,7 @@ const SignUp = ({ navigation, route }) => {
   const [country, setCountry] = useState("");
   const [pinCode, setPinCode] = useState("");
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const disableBtn =
     !name || !email || !password || !address || !city || !country || !pinCode;
@@ -49,20 +51,25 @@ const SignUp = ({ navigation, route }) => {
       });
     }
 
-    // dispatch(register(myForm));
+    dispatch(register(myForm));
   };
 
-  const loading = false;
-  // const loading = useMessageAndErrorUser(navigation, dispatch, "profile");
+  const loading = useMessageAndErrorUser(navigation, dispatch, "Profile");
 
   useEffect(() => {
     if (route.params?.image) setAvatar(route.params.image);
   }, [route.params]);
   return (
     <>
-      <View style={defaultStyle}>
+      <View style={[{ ...defaultStyle, paddingHorizontal: 20 }]}>
         {/* Heading */}
-        <View style={{ marginBottom: 20 }}>
+        <View
+          style={{
+            marginBottom: 20,
+            backgroundColor: colors.color3,
+            borderRadius: 10,
+          }}
+        >
           <Text style={formHeading}>Sign Up</Text>
         </View>
 
@@ -74,6 +81,7 @@ const SignUp = ({ navigation, route }) => {
             borderRadius: 10,
             backgroundColor: colors.color3,
           }}
+          contentContainerStyle={{ paddingBottom: 50 }}
         >
           <View style={{ minHeight: 900 }}>
             <Avatar.Image
@@ -86,7 +94,7 @@ const SignUp = ({ navigation, route }) => {
                 uri: avatar ? avatar : defaultImg,
               }}
             />
-            <TouchableOpacity onPress={() => navigation.navigate("camera")}>
+            <TouchableOpacity onPress={() => navigation.navigate("Camera")}>
               <Button textColor={colors.color1}>Change Photo</Button>
             </TouchableOpacity>
 
@@ -153,7 +161,7 @@ const SignUp = ({ navigation, route }) => {
 
             <TouchableOpacity
               activeOpacity={0.8}
-              onPress={() => navigation.navigate("login")}
+              onPress={() => navigation.navigate("Login")}
             >
               <Text style={styles.link}>Log In</Text>
             </TouchableOpacity>
@@ -161,7 +169,7 @@ const SignUp = ({ navigation, route }) => {
         </ScrollView>
       </View>
 
-      <Footer activeRoute="profile" />
+      <Footer activeRoute="Profile" />
     </>
   );
 };

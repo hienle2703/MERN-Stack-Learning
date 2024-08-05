@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Toast from "react-native-toast-message";
@@ -26,13 +26,21 @@ import NewProduct from "./screens/NewProduct";
 import ProductImages from "./screens/ProductImages";
 
 import Camera from "./screens/Camera";
+import { useDispatch } from "react-redux";
+import { loadUser } from "../redux/actions/userActions";
 
 const Stack = createNativeStackNavigator();
 const Main = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadUser());
+  }, [dispatch]);
+
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator
-        initialRouteName="Home"
+        initialRouteName="Login"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Group>

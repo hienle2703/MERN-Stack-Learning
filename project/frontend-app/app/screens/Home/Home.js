@@ -82,109 +82,111 @@ const Home = () => {
 
   return (
     <>
-      <View style={{ ...defaultStyle }}>
-        <Header />
-        <View
-          style={{
-            flexDirection: "row",
-            paddingTop: 20,
-            justifyContent: "space-between",
-            alignItems: "center",
-            paddingHorizontal: 35,
-          }}
-        >
-          <Heading />
-          <TouchableOpacity onPress={() => setActiveSearch((prev) => !prev)}>
-            <Avatar.Icon
-              icon={"magnify"}
-              size={50}
-              color={"gray"}
-              style={{
-                backgroundColor: colors.color2,
-                shadowColor: "#000",
-                shadowOffset: {
-                  width: 0,
-                  height: 2,
-                },
-                shadowOpacity: 0.25,
-                shadowRadius: 3.84,
-
-                elevation: 5,
-              }}
-            />
-          </TouchableOpacity>
-        </View>
-        {/* Categories */}
-
-        <View
-          style={{
-            flexDirection: "row",
-            height: 80,
-          }}
-        >
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ alignItems: "center", paddingLeft: 20 }}
+      <ScrollView contentContainerStyle={{ paddingBottom: 100, backgroundColor: colors.color2 }}>
+        <View style={{ ...defaultStyle }}>
+          <Header />
+          <View
+            style={{
+              flexDirection: "row",
+              paddingTop: 20,
+              justifyContent: "space-between",
+              alignItems: "center",
+              paddingHorizontal: 35,
+            }}
           >
-            {categories.map((item, index) => {
-              return (
-                <TouchableOpacity
-                  key={item._id}
-                  style={{
-                    backgroundColor:
-                      category === item._id ? colors.color1 : colors.color5,
-                    borderRadius: 100,
-                    margin: 5,
-                    paddingVertical: 10,
-                    paddingHorizontal: 20,
-                  }}
-                  onPress={categoryButtonHandler(item._id)}
-                >
-                  <Text
-                    style={{
-                      color: category === item._id ? colors.color2 : "gray",
-                      fontSize: 12,
-                    }}
-                  >
-                    {item.category}
-                  </Text>
-                </TouchableOpacity>
-              );
-            })}
-          </ScrollView>
-        </View>
-        {/* Products */}
-        <View style={{ flex: 1 }}>
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={{ paddingLeft: 10 }}
-          >
-            {products.map((item, index) => (
-              <ProductCard
-                key={index}
-                stock={item.stock}
-                name={item.name}
-                price={item.price}
-                image={item.images[0]?.url}
-                addToCartHandler={addToCartHandler(item._id)}
-                i={index}
-                id={item._id}
-                navigate={navigate}
+            <Heading />
+            <TouchableOpacity onPress={() => setActiveSearch((prev) => !prev)}>
+              <Avatar.Icon
+                icon={"magnify"}
+                size={50}
+                color={"gray"}
+                style={{
+                  backgroundColor: colors.color2,
+                  shadowColor: "#000",
+                  shadowOffset: {
+                    width: 0,
+                    height: 2,
+                  },
+                  shadowOpacity: 0.25,
+                  shadowRadius: 3.84,
+
+                  elevation: 5,
+                }}
               />
-            ))}
-          </ScrollView>
+            </TouchableOpacity>
+          </View>
+          {/* Categories */}
+
+          <View
+            style={{
+              flexDirection: "row",
+              height: 80,
+            }}
+          >
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{ alignItems: "center", paddingLeft: 20 }}
+            >
+              {categories.map((item, index) => {
+                return (
+                  <TouchableOpacity
+                    key={item._id}
+                    style={{
+                      backgroundColor:
+                        category === item._id ? colors.color1 : colors.color5,
+                      borderRadius: 100,
+                      margin: 5,
+                      paddingVertical: 10,
+                      paddingHorizontal: 20,
+                    }}
+                    onPress={categoryButtonHandler(item._id)}
+                  >
+                    <Text
+                      style={{
+                        color: category === item._id ? colors.color2 : "gray",
+                        fontSize: 12,
+                      }}
+                    >
+                      {item.category}
+                    </Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </ScrollView>
+          </View>
+          {/* Products */}
+          <View style={{ flex: 1 }}>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{ paddingLeft: 10 }}
+            >
+              {products.map((item, index) => (
+                <ProductCard
+                  key={index}
+                  stock={item.stock}
+                  name={item.name}
+                  price={item.price}
+                  image={item.images[0]?.url}
+                  addToCartHandler={addToCartHandler(item._id)}
+                  i={index}
+                  id={item._id}
+                  navigate={navigate}
+                />
+              ))}
+            </ScrollView>
+          </View>
         </View>
-      </View>
-      {activeSearch && (
-        <SearchModal
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          setActiveSearch={setActiveSearch}
-          products={products}
-        />
-      )}
+        {activeSearch && (
+          <SearchModal
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            setActiveSearch={setActiveSearch}
+            products={products}
+          />
+        )}
+      </ScrollView>
       <Footer activeRoute={"home"} />
     </>
   );

@@ -1,4 +1,10 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import {
   colors,
@@ -10,33 +16,28 @@ import { Avatar, Button } from "react-native-paper";
 import ButtonBox from "../components/ButtonBox";
 import Footer from "../components/Footer";
 import Loader from "../components/Loader";
-// import { useDispatch, useSelector } from "react-redux";
-// import { loadUser, logout } from "../redux/actions/userActions";
+import { loadUser, logout } from "../../redux/actions/userActions";
 // import {
 //   useMessageAndErrorOther,
 //   useMessageAndErrorUser,
 // } from "../utils/hooks";
 import { useIsFocused } from "@react-navigation/native";
 import mime from "mime";
+import { useDispatch, useSelector } from "react-redux";
+import { useMessageAndErrorUser } from "../utils/hooks";
 // import { updatePic } from "../redux/actions/otherAction";
 
 const Profile = ({ navigation, route }) => {
-  //   const { user } = useSelector((state) => state.user);
-  const user = {
-    email: "haha@gmail.com",
-    name: "Hien Le",
-    role: "admin",
-  };
+  const { user } = useSelector((state) => state.user);
   const [avatar, setAvatar] = useState(defaultImg);
 
-  //   const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const isFocused = useIsFocused();
 
-  //   const loading = useMessageAndErrorUser(navigation, dispatch, "login");
-  const loading = false;
+  const loading = useMessageAndErrorUser(navigation, dispatch, "Login");
 
   const logoutHandler = () => {
-    // dispatch(logout());
+    dispatch(logout());
   };
 
   const navigateHandler = (text) => {
@@ -63,8 +64,7 @@ const Profile = ({ navigation, route }) => {
     }
   };
 
-  //   const loadingPic = useMessageAndErrorOther(dispatch, null, null, loadUser);
-  const loadingPic = false;
+  const loadingPic = useMessageAndErrorUser(dispatch, null, null, loadUser);
 
   useEffect(() => {
     if (route.params?.image) {
@@ -76,21 +76,25 @@ const Profile = ({ navigation, route }) => {
         type: mime.getType(route.params.image),
         name: route.params.image.split("/").pop(),
       });
-      //   dispatch(updatePic(myForm));
+      // dispatch(updatePic(myForm));
     }
 
-    // dispatch(loadUser());
-  }, [route.params, isFocused]); // dispatch
+    dispatch(loadUser());
+  }, [route.params, isFocused, dispatch]); // dispatch
 
-  //   useEffect(() => {
-  //     if (user?.avatar) {
-  //       setAvatar(user.avatar.url);
-  //     }
-  //   }, [user]);
+  useEffect(() => {
+    if (user?.avatar) {
+      setAvatar(user.avatar.url);
+    }
+  }, [user]);
 
   return (
     <>
-      <View style={{ ...defaultStyle, paddingHorizontal: 35 }}>
+      <ScrollView
+        style={{ ...defaultStyle, paddingHorizontal: 20 }}
+        contentContainerStyle={{ paddingBottom: 100 }}
+        showsVerticalScrollIndicator={false}
+      >
         {/* Heading */}
         <View
           style={{
@@ -101,8 +105,6 @@ const Profile = ({ navigation, route }) => {
         >
           <Text style={formHeading}>Profile</Text>
         </View>
-
-        {/* Loading */}
 
         {loading ? (
           <Loader />
@@ -192,7 +194,7 @@ const Profile = ({ navigation, route }) => {
             </View>
           </>
         )}
-      </View>
+      </ScrollView>
 
       <Footer />
     </>

@@ -1,17 +1,14 @@
-import { View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity, Keyboard } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { colors } from "../styles/styles";
 import { Avatar } from "react-native-paper";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Footer = ({ activeRoute = "home" }) => {
   const navigate = useNavigation();
 
-  // const { loading, isAuthenticated } = useSelector((state) => state.user);
-
-  const isAuthenticated = true;
-  const loading = false;
+  const { loading, isAuthenticated } = useSelector((state) => state.user);
 
   const navigatationHandler = (key) => {
     switch (key) {
@@ -40,7 +37,7 @@ const Footer = ({ activeRoute = "home" }) => {
   };
 
   return (
-    loading === false && (
+    loading === false && !Keyboard.isVisible() && (
       <View
         style={{
           backgroundColor: colors.color1,
