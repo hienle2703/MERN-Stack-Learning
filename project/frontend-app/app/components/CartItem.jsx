@@ -12,8 +12,8 @@ const CartItem = ({
   index,
   imgSrc,
   id,
-  decreaseHandler,
-  increaseHandler,
+  decrementHandler,
+  incrementHandler,
   navigate,
 }) => {
   return (
@@ -68,7 +68,7 @@ const CartItem = ({
 
       <View style={styles.qtyContainer}>
         <TouchableOpacity
-          onPress={() => decreaseHandler(id, name, amount, imgSrc, stock, qty)}
+          onPress={() => decrementHandler(id, name, amount, imgSrc, stock, qty)}
         >
           <Avatar.Icon icon={"minus"} {...iconOptions} />
         </TouchableOpacity>
@@ -76,7 +76,7 @@ const CartItem = ({
         <Text style={styles.qtyText}>{qty}</Text>
 
         <TouchableOpacity
-          onPress={() => increaseHandler(id, name, amount, imgSrc, stock, qty)}
+          onPress={() => incrementHandler(id, name, amount, imgSrc, stock, qty)}
         >
           <Avatar.Icon icon={"plus"} {...iconOptions} />
         </TouchableOpacity>

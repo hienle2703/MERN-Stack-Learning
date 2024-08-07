@@ -17,15 +17,15 @@ import ButtonBox from "../components/ButtonBox";
 import Footer from "../components/Footer";
 import Loader from "../components/Loader";
 import { loadUser, logout } from "../../redux/actions/userActions";
-// import {
-//   useMessageAndErrorOther,
-//   useMessageAndErrorUser,
-// } from "../utils/hooks";
+
 import { useIsFocused } from "@react-navigation/native";
 import mime from "mime";
 import { useDispatch, useSelector } from "react-redux";
-import { useMessageAndErrorUser } from "../utils/hooks";
-// import { updatePic } from "../redux/actions/otherAction";
+import {
+  useMessageAndErrorOther,
+  useMessageAndErrorUser,
+} from "../utils/hooks";
+import { updatePic } from "../../redux/actions/otherAction";
 
 const Profile = ({ navigation, route }) => {
   const { user } = useSelector((state) => state.user);
@@ -64,23 +64,23 @@ const Profile = ({ navigation, route }) => {
     }
   };
 
-  const loadingPic = useMessageAndErrorUser(dispatch, null, null, loadUser);
+  const loadingPic = useMessageAndErrorOther(dispatch, null, null, loadUser);
 
   useEffect(() => {
     if (route.params?.image) {
       setAvatar(route.params.image);
-      // dispatch updatePic Here
+
       const myForm = new FormData();
       myForm.append("file", {
         uri: route.params.image,
         type: mime.getType(route.params.image),
         name: route.params.image.split("/").pop(),
       });
-      // dispatch(updatePic(myForm));
+      dispatch(updatePic(myForm));
     }
 
     dispatch(loadUser());
-  }, [route.params, isFocused, dispatch]); // dispatch
+  }, [route.params, isFocused, dispatch]);
 
   useEffect(() => {
     if (user?.avatar) {

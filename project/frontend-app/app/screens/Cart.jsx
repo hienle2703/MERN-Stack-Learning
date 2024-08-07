@@ -1,58 +1,85 @@
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import React from "react";
-
 import { colors, defaultStyle } from "../styles/styles";
-import { CartItem, Header, Heading } from "../components";
+import Header from "../components/Header";
+import Heading from "../components/Heading";
 import { Button } from "react-native-paper";
+import CartItem from "../components/CartItem";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { Toast } from "react-native-toast-message/lib/src/Toast";
 
-export const cartItems = [
-  {
-    name: "Macbook",
-    image:
-      "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/refurb-macbook-air-space-gray-m1-202010?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1634145627000",
-    product: "aposdjposadj",
-    stock: 3,
-    price: 49999,
-    quantity: 2,
-  },
-  {
-    name: "Shoes",
-    image:
-      "https://product.hstatic.net/1000383440/product/dscf0190_44fc2481970d4900bd0ccff6c5e49ac1_master.jpg",
-    product: "sajdis",
-    stock: 5,
-    price: 1090,
-    quantity: 2,
-  },
-];
 const Cart = () => {
-  const navigation = useNavigation();
+  const navigate = useNavigation();
+  const dispatch = useDispatch();
 
-  const increaseHandler = () => {};
+  const { cartItems } = useSelector((state) => state.cart);
 
-  const decreaseHandler = () => {};
-
-  const onCheckout = () => {
-    console.log(cartItems.length > 0)
-    cartItems.length > 0 ? navigation.navigate("ConfirmOrder") : null;
+  const incrementHandler = (id, name, price, image, stock, quantity) => {
+    const newQty = quantity + 1;
+    if (stock <= quantity)
+      return Toast.show({
+        type: "error",
+        text1: "Maximum value added",
+      });
+    dispatch({
+      type: "addToCart",
+      payload: {
+        product: id,
+        name,
+        price,
+        image,
+        stock,
+        quantity: newQty,
+      },
+    });
   };
 
-  return (
-    <View style={{ ...defaultStyle }}>
-      <Header back emptyCart />
+  const decrementHandler = (id, name, price, image, stock, quantity) => {
+    const newQty = quantity - 1;
 
+    if (1 >= quantity) return dispatch({ type: "removeFromCart", payload: id });
+
+    dispatch({
+      type: "addToCart",
+      payload: {
+        product: id,
+        name,
+        price,
+        image,
+        stock,
+        quantity: newQty,
+      },
+    });
+  };
+  return (
+    <View
+      style={{
+        ...defaultStyle,
+        padding: 0,
+      }}
+    >
+      {/* Header */}
+      <Header back={true} emptyCart={true} />
+
+      {/* Heading */}
       <Heading
-        text1={"Shopping"}
-        text2={"Cart"}
-        containerStyle={{ marginLeft: 35 }}
+        text1="Shopping"
+        text2="Cart"
+        containerStyle={{ paddingTop: 70, marginLeft: 35 }}
       />
 
-      <View style={{ flex: 1 }}>
-        <ScrollView>
-          {cartItems.map((i, index) => {
-            return (
+      <View
+        style={{
+          paddingVertical: 20,
+          flex: 1,
+        }}
+      >
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {cartItems.length > 0 ? (
+            cartItems.map((i, index) => (
               <CartItem
+                navigate={navigate}
                 key={i.product}
                 id={i.product}
                 name={i.name}
@@ -61,11 +88,15 @@ const Cart = () => {
                 imgSrc={i.image}
                 index={index}
                 qty={i.quantity}
-                increaseHandler={increaseHandler}
-                decreaseHandler={decreaseHandler}
+                incrementHandler={incrementHandler}
+                decrementHandler={decrementHandler}
               />
-            );
-          })}
+            ))
+          ) : (
+            <Text style={{ textAlign: "center", fontSize: 18 }}>
+              No Items Yet
+            </Text>
+          )}
         </ScrollView>
       </View>
 
@@ -76,11 +107,21 @@ const Cart = () => {
           paddingHorizontal: 35,
         }}
       >
-        <Text>5 Items</Text>
-        <Text>$5</Text>
+        <Text>{cartItems.length} Items</Text>
+        <Text>
+          ₹
+          {cartItems.reduce(
+            (prev, curr) => prev + curr.quantity * curr.price,
+            0
+          )}
+        </Text>
       </View>
 
-      <TouchableOpacity onPress={onCheckout}>
+      <TouchableOpacity
+        onPress={
+          cartItems.length > 0 ? () => navigate.navigate("ConfirmOrder") : null
+        }
+      >
         <Button
           style={{
             backgroundColor: colors.color3,

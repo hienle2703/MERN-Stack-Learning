@@ -9,21 +9,12 @@ import {
 } from "../styles/styles";
 import { Button, TextInput } from "react-native-paper";
 import Header from "../components/Header";
-// import { useDispatch, useSelector } from "react-redux";
-// import { updateProfile } from "../redux/actions/otherAction";
-// import { useMessageAndErrorOther } from "../utils/hooks";
+import { useDispatch, useSelector } from "react-redux";
+import { updateProfile } from "../../redux/actions/otherAction";
+import { useMessageAndErrorOther } from "../utils/hooks";
 
 const UpdateProfile = ({ navigation }) => {
-  //   const { user } = useSelector((state) => state.user);
-
-  const user = {
-    name: "John",
-    email: "johnlenon@gmail.com",
-    address: "1234 Main St",
-    city: "New York",
-    country: "USA",
-    pinCode: 123456,
-  };
+  const { user } = useSelector((state) => state.user);
 
   const [name, setName] = useState(user?.name);
   const [email, setEmail] = useState(user?.email);
@@ -32,17 +23,20 @@ const UpdateProfile = ({ navigation }) => {
   const [country, setCountry] = useState(user?.country);
   const [pinCode, setPinCode] = useState(user?.pinCode.toString());
 
-  //   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  //   const loading = useMessageAndErrorOther(dispatch, navigation, "profile");
-  const loading = false;
+  const loading = useMessageAndErrorOther(dispatch, navigation, "Profile");
 
   const submitHandler = () => {
-    // dispatch(updateProfile(name, email, address, city, country, pinCode));
+    dispatch(updateProfile(name, email, address, city, country, pinCode));
   };
 
   return (
-    <View style={{ ...defaultStyle, paddingHorizontal: 35 }}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      style={{ ...defaultStyle, paddingHorizontal: 20 }}
+      contentContainerStyle={{ paddingBottom: 30 }}
+    >
       <Header back />
 
       {/* Heading */}
@@ -57,68 +51,65 @@ const UpdateProfile = ({ navigation }) => {
         <Text style={formHeading}>Edit Profile</Text>
       </View>
 
-      <ScrollView
-        showsVerticalScrollIndicator={false}
+      <View
         style={{
-          padding: 20,
+          paddingVertical: 10,
           elevation: 10,
           borderRadius: 10,
           backgroundColor: colors.color3,
         }}
       >
-        <View>
-          <TextInput
-            {...inputOptions}
-            placeholder="Name"
-            value={name}
-            onChangeText={setName}
-          />
+        <TextInput
+          {...inputOptions}
+          placeholder="Name"
+          value={name}
+          onChangeText={setName}
+        />
 
-          <TextInput
-            {...inputOptions}
-            placeholder="Email"
-            keyboardType="email-address"
-            value={email}
-            onChangeText={setEmail}
-          />
+        <TextInput
+          {...inputOptions}
+          placeholder="Email"
+          keyboardType="email-address"
+          value={email}
+          onChangeText={setEmail}
+        />
 
-          <TextInput
-            {...inputOptions}
-            placeholder="Address"
-            value={address}
-            onChangeText={setAddress}
-          />
-          <TextInput
-            {...inputOptions}
-            placeholder="City"
-            value={city}
-            onChangeText={setCity}
-          />
-          <TextInput
-            {...inputOptions}
-            placeholder="Country"
-            value={country}
-            onChangeText={setCountry}
-          />
+        <TextInput
+          {...inputOptions}
+          placeholder="Address"
+          value={address}
+          onChangeText={setAddress}
+        />
+        <TextInput
+          {...inputOptions}
+          placeholder="City"
+          value={city}
+          onChangeText={setCity}
+        />
+        <TextInput
+          {...inputOptions}
+          placeholder="Country"
+          value={country}
+          onChangeText={setCountry}
+        />
 
-          <TextInput
-            {...inputOptions}
-            placeholder="Pin Code"
-            value={pinCode}
-            onChangeText={setPinCode}
-          />
+        <TextInput
+          {...inputOptions}
+          placeholder="Pin Code"
+          value={pinCode}
+          onChangeText={setPinCode}
+        />
 
-          <Button
-            loading={loading}
-            textColor={colors.color2}
-            style={styles.btn}
-            onPress={submitHandler}
-          >
-            Update
-          </Button>
-        </View>
-      </ScrollView>
-    </View>
+        <Button
+          loading={loading}
+          textColor={colors.color2}
+          style={styles.btn}
+          onPress={submitHandler}
+        >
+          Update
+        </Button>
+      </View>
+    </ScrollView>
   );
 };
 

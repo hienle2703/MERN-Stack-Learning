@@ -10,7 +10,7 @@ const Footer = ({ activeRoute = "home" }) => {
 
   const { loading, isAuthenticated } = useSelector((state) => state.user);
 
-  const navigatationHandler = (key) => {
+  const navigationHandler = (key) => {
     switch (key) {
       case 0:
         navigate.navigate("Home");
@@ -37,7 +37,8 @@ const Footer = ({ activeRoute = "home" }) => {
   };
 
   return (
-    loading === false && !Keyboard.isVisible() && (
+    loading === false &&
+    !Keyboard.isVisible() && (
       <View
         style={{
           backgroundColor: colors.color1,
@@ -56,7 +57,7 @@ const Footer = ({ activeRoute = "home" }) => {
         >
           <TouchableOpacity
             activeOpacity={0.8}
-            onPress={() => navigatationHandler(1)}
+            onPress={() => navigationHandler(1)}
           >
             <Avatar.Icon
               {...avatarOptions}
@@ -66,7 +67,7 @@ const Footer = ({ activeRoute = "home" }) => {
 
           <TouchableOpacity
             activeOpacity={0.8}
-            onPress={() => navigatationHandler(2)}
+            onPress={() => navigationHandler(2)}
           >
             <Avatar.Icon
               {...avatarOptions}
@@ -103,7 +104,7 @@ const Footer = ({ activeRoute = "home" }) => {
           >
             <TouchableOpacity
               activeOpacity={0.8}
-              onPress={() => navigatationHandler(0)}
+              onPress={() => navigationHandler(0)}
             >
               <Avatar.Icon
                 {...avatarOptions}

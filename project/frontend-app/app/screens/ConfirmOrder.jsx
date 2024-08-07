@@ -1,33 +1,37 @@
-import { View, ScrollView, Text, TouchableOpacity } from "react-native";
-import React from "react";
-
+import { View, Text, ScrollView, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
 import { colors, defaultStyle } from "../styles/styles";
-import { Header, Heading, ConfirmOrderItem } from "../components";
-import { cartItems } from "./Cart";
+import Header from "../components/Header";
+import Heading from "../components/Heading";
+import ConfirmOrderItem from "../components/ConfirmOrderItem";
 import { useNavigation } from "@react-navigation/native";
 import { Button } from "react-native-paper";
+import { useSelector } from "react-redux";
 
 const ConfirmOrder = () => {
-  const navigation = useNavigation();
+  const navigate = useNavigation();
 
-  const itemsPrice = 4000;
-  const shippingCharges = 200;
-  const tax = 0.18 * itemsPrice;
-  const totalAmount = itemsPrice + shippingCharges + tax;
+  const { cartItems } = useSelector((state) => state.cart);
 
+  const [itemsPrice] = useState(
+    cartItems.reduce((prev, curr) => prev + curr.quantity * curr.price, 0)
+  );
+  const [shippingCharges] = useState(itemsPrice > 10000 ? 0 : 200);
+  const [tax] = useState(Number((0.18 * itemsPrice).toFixed()));
+  const [totalAmount] = useState(itemsPrice + shippingCharges + tax);
   return (
-    <View style={{ ...defaultStyle }}>
-      <Header back />
+    <View style={{ ...defaultStyle, paddingHorizontal: 20 }}>
+      <Header back={true} />
+      {/* Heading */}
+      <Heading text1="Confirm" text2="Order" />
 
       <View
         style={{
           paddingVertical: 20,
-          paddingHorizontal: 35,
           flex: 1,
         }}
       >
-        <Heading text1="Confirm" text2="Order" />
-        <ScrollView contentContainerStyle={{ paddingTop: 30 }}>
+        <ScrollView>
           {cartItems.map((i) => (
             <ConfirmOrderItem
               key={i.product}
@@ -40,41 +44,37 @@ const ConfirmOrder = () => {
         </ScrollView>
       </View>
 
-      {/* Footer */}
-      <View style={{ paddingHorizontal: 35 }}>
-        <PriceTag heading={"Subtotal"} value={itemsPrice} />
-        <PriceTag heading={"Shipping"} value={shippingCharges} />
-        <PriceTag heading={"Tax"} value={tax} />
-        <PriceTag heading={"Total"} value={totalAmount} />
+      <PriceTag heading={"Subtotal"} value={itemsPrice} />
+      <PriceTag heading={"Shipping"} value={shippingCharges} />
+      <PriceTag heading={"Tax"} value={tax} />
+      <PriceTag heading={"Total"} value={totalAmount} />
 
-        <TouchableOpacity
-          onPress={() =>
-            navigation.navigate("Payment", {
-              itemsPrice,
-              shippingCharges,
-              tax,
-              totalAmount,
-            })
-          }
+      <TouchableOpacity
+        onPress={() =>
+          navigate.navigate("Payment", {
+            itemsPrice,
+            shippingCharges,
+            tax,
+            totalAmount,
+          })
+        }
+      >
+        <Button
+          style={{
+            backgroundColor: colors.color3,
+            borderRadius: 100,
+            padding: 5,
+            margin: 10,
+          }}
+          textColor={colors.color2}
+          icon={"chevron-right"}
         >
-          <Button
-            style={{
-              backgroundColor: colors.color3,
-              borderRadius: 100,
-              padding: 5,
-              margin: 10,
-            }}
-            textColor={colors.color2}
-            icon={"chevron-right"}
-          >
-            Payment
-          </Button>
-        </TouchableOpacity>
-      </View>
+          Payment
+        </Button>
+      </TouchableOpacity>
     </View>
   );
 };
-
 const PriceTag = ({ heading, value }) => (
   <View
     style={{
