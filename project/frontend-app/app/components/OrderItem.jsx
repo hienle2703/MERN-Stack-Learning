@@ -11,7 +11,7 @@ const OrderItem = ({
   status,
   paymentMethod,
   updateHandler,
-  admin = true,
+  admin = false,
   loading,
   i = 0,
 }) => {
@@ -22,20 +22,14 @@ const OrderItem = ({
         backgroundColor: i % 2 === 0 ? colors.color2 : colors.color3,
       }}
     >
-      <View
+      <Text
         style={{
-          ...styles.titleContainer,
+          ...styles.text,
           backgroundColor: i % 2 === 0 ? colors.color3 : colors.color1,
         }}
       >
-        <Text
-          style={{
-            ...styles.text,
-          }}
-        >
-          ID - #{id}
-        </Text>
-      </View>
+        ID - #{id}
+      </Text>
 
       <TextBox title={"Address"} value={address} i={i} />
       <TextBox title={"Ordered On"} value={orderedOn} i={i} />
@@ -85,7 +79,10 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     elevation: 5,
   },
-  titleContainer: {
+  text: {
+    color: colors.color2,
+    fontSize: 16,
+    fontWeight: "900",
     marginHorizontal: -20,
     marginTop: -20,
     marginBottom: 10,
@@ -93,11 +90,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderTopRightRadius: 10,
     borderTopLeftRadius: 10,
-  },
-  text: {
-    color: colors.color2,
-    fontSize: 16,
-    fontWeight: "900",
   },
 });
 

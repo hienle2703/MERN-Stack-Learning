@@ -2,29 +2,27 @@ import { View, Text, ScrollView } from "react-native";
 import React from "react";
 import { colors, defaultStyle, formHeading } from "../styles/styles";
 import { Header, Loader, OrderItem } from "../components";
-// import { useGetOrders, useMessageAndErrorOther } from "../../utils/hooks";
+import { useGetOrders, useMessageAndErrorOther } from "../utils/hooks";
 import { useIsFocused } from "@react-navigation/native";
 import { Headline } from "react-native-paper";
-// import { useDispatch } from "react-redux";
-// import { processOrder } from "../../redux/actions/otherAction";
-import { orders } from "./Orders";
+import { useDispatch } from "react-redux";
+import { processOrder } from "../../redux/actions/otherAction";
+// import { orders } from "./Orders";
 
 const AdminOrders = ({ navigation }) => {
   const isFocused = useIsFocused();
-  //   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  //   const { loading, orders } = useGetOrders(isFocused, true);
-  const loading = false;
+  const { loading, orders } = useGetOrders(isFocused, true);
 
-  //   const processOrderLoading = useMessageAndErrorOther(
-  //     dispatch,
-  //     navigation,
-  //     "AdminPanel"
-  //   );
-  const processOrderLoading = false;
+  const processOrderLoading = useMessageAndErrorOther(
+    dispatch,
+    navigation,
+    "AdminPanel"
+  );
 
   const updateHandler = (id) => {
-    //   dispatch(processOrder(id));
+    dispatch(processOrder(id));
   };
 
   return (

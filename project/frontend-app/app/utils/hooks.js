@@ -1,9 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Toast from "react-native-toast-message";
 import { loadUser } from "../../redux/actions/userActions";
 import axios from "axios";
 import { server } from "../../redux/store";
+import { getAdminProducts } from "../../redux/actions/productAction";
 
 export const useMessageAndErrorUser = (
   navigation,
@@ -93,4 +94,61 @@ export const useSetCategories = (setCategories, isFocused) => {
         });
       });
   }, [isFocused]);
+};
+
+export const useGetOrders = (isFocused, isAdmin = false) => {
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+
+    axios
+      .get(`${server}/order/${isAdmin ? "admin" : "my"}`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setOrders(res.data.orders);
+        setLoading(false);
+      })
+      .catch((e) => {
+        Toast.show({
+          type: "error",
+          text1: e.response.data.message,
+        });
+        setLoading(false);
+      });
+  }, [isFocused]);
+
+  return {
+    orders,
+    loading,
+  };
+};
+
+export const useAdminProducts = (dispatch, isFocused) => {
+  const { products, inStock, outOfStock, error, loading } = useSelector(
+    (state) => state.product
+  );
+
+  useEffect(() => {
+    if (error) {
+      Toast.show({
+        type: "error",
+        text1: error,
+      });
+      dispatch({
+        type: "clearError",
+      });
+    }
+
+    dispatch(getAdminProducts());
+  }, [dispatch, isFocused, error]);
+
+  return {
+    products,
+    inStock,
+    outOfStock,
+    loading,
+  };
 };

@@ -146,3 +146,54 @@ export const placeOrder =
       });
     }
   };
+
+export const processOrder = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "processOrderRequest",
+    });
+
+    const { data } = await axios.put(
+      `${server}/order/single/${id}`,
+
+      {},
+      {
+        withCredentials: true,
+      }
+    );
+    dispatch({
+      type: "processOrderSuccess",
+      payload: data.message,
+    });
+  } catch (error) {
+    dispatch({
+      type: "processOrderFail",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const deleteProduct = (productId) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "deleteProductRequest",
+    });
+
+    const { data } = await axios.delete(
+      `${server}/product/single/${productId}`,
+      {
+        withCredentials: true,
+      }
+    );
+
+    dispatch({
+      type: "deleteProductSuccess",
+      payload: data.message,
+    });
+  } catch (error) {
+    dispatch({
+      type: "deleteProductFail",
+      payload: error.response.data.message,
+    });
+  }
+};
