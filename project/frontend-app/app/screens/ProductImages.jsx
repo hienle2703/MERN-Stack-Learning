@@ -1,15 +1,16 @@
 import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
 import { colors, defaultStyle, formHeading } from "../styles/styles";
-import { Header, ImageCard } from "../components";
+import Header from "../components/Header";
+import ImageCard from "../components/ImageCard";
 import { Avatar, Button } from "react-native-paper";
-// import { useMessageAndErrorOther } from "../../utils/hooks";
-// import { useDispatch } from "react-redux";
+import { useMessageAndErrorOther } from "../utils/hooks";
+import { useDispatch } from "react-redux";
 import mime from "mime";
-// import {
-//   deleteProductImage,
-//   updateProductImage,
-// } from "../../redux/actions/otherAction";
+import {
+  deleteProductImage,
+  updateProductImage,
+} from "../../redux/actions/otherAction";
 
 const ProductImages = ({ navigation, route }) => {
   const [images] = useState(route.params.images);
@@ -17,13 +18,12 @@ const ProductImages = ({ navigation, route }) => {
   const [image, setImage] = useState(null);
   const [imageChanged, setImageChanged] = useState(false);
 
-  //   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  //   const loading = useMessageAndErrorOther(dispatch, navigation, "adminpanel");
-  const loading = false;
+  const loading = useMessageAndErrorOther(dispatch, navigation, "AdminPanel");
 
   const deleteHandler = (imageId) => {
-    // dispatch(deleteProductImage(productId, imageId));
+    dispatch(deleteProductImage(productId, imageId));
   };
 
   const submitHandler = () => {
@@ -35,7 +35,7 @@ const ProductImages = ({ navigation, route }) => {
       name: image.split("/").pop(),
     });
 
-    // dispatch(updateProductImage(productId, myForm));
+    dispatch(updateProductImage(productId, myForm));
   };
 
   useEffect(() => {
@@ -50,19 +50,12 @@ const ProductImages = ({ navigation, route }) => {
       style={{
         ...defaultStyle,
         backgroundColor: colors.color5,
-        marginHorizontal: 20,
       }}
     >
       <Header back={true} />
 
       {/* Heading */}
-      <View
-        style={{
-          marginBottom: 20,
-          backgroundColor: colors.color3,
-          borderRadius: 10,
-        }}
-      >
+      <View style={{ marginBottom: 20, paddingTop: 70 }}>
         <Text style={formHeading}>Images</Text>
       </View>
 
@@ -116,7 +109,7 @@ const ProductImages = ({ navigation, route }) => {
           <TouchableOpacity
             activeOpacity={0.8}
             onPress={() =>
-              navigation.navigate("camera", { updateProduct: true })
+              navigation.navigate("Camera", { updateProduct: true })
             }
           >
             <Avatar.Icon

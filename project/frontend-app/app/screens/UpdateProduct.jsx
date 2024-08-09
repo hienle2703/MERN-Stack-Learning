@@ -1,6 +1,6 @@
-import { View, Text, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
-import { Header, Loader, SelectComponent } from "../components";
+import Header from "../components/Header";
 import {
   colors,
   defaultStyle,
@@ -8,20 +8,21 @@ import {
   inputOptions,
   inputStyling,
 } from "../styles/styles";
+import Loader from "../components/Loader";
 import { Button, TextInput } from "react-native-paper";
-// import { useMessageAndErrorOther, useSetCategories } from "../../utils/hooks";
+import SelectComponent from "../components/SelectComponent";
+import { useMessageAndErrorOther, useSetCategories } from "../utils/hooks";
 import { useIsFocused } from "@react-navigation/native";
-// import { useDispatch, useSelector } from "react-redux";
-// import { getProductDetails } from "../../redux/actions/productAction";
-// import { updateProduct } from "../../redux/actions/otherAction";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductDetails } from "../../redux/actions/productAction";
+import { updateProduct } from "../../redux/actions/otherAction";
 
 const UpdateProduct = ({ navigation, route }) => {
   const isFocused = useIsFocused();
-  //   const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
 
-  //   const { product, loading } = useSelector((state) => state.product);
-  const loading = false;
+  const { product, loading } = useSelector((state) => state.product);
 
   const [id] = useState(route.params.id);
   const [name, setName] = useState("");
@@ -30,40 +31,34 @@ const UpdateProduct = ({ navigation, route }) => {
   const [stock, setStock] = useState("");
   const [category, setCategory] = useState("");
   const [categoryID, setCategoryID] = useState("");
-  const [categories, setCategories] = useState([
-    { _id: "hdadhiawd", category: "Laptop" },
-    { _id: "wdwdwdwd", category: "Cat" },
-    { _id: "asasasasas", category: "Tarot" },
-    { _id: "qweqweqweqwe", category: "Oracle" },
-  ]);
+  const [categories, setCategories] = useState([]);
 
-  //   useSetCategories(setCategories, isFocused);
+  useSetCategories(setCategories, isFocused);
 
   const submitHandler = () => {
-    // dispatch(updateProduct(id, name, description, price, stock, categoryID));
+    dispatch(updateProduct(id, name, description, price, stock, categoryID));
   };
 
-  //   const loadingOther = useMessageAndErrorOther(
-  //     dispatch,
-  //     navigation,
-  //     "adminpanel"
-  //   );
-  const loadingOther = false;
+  const loadingOther = useMessageAndErrorOther(
+    dispatch,
+    navigation,
+    "AdminPanel"
+  );
 
-  //   useEffect(() => {
-  //     dispatch(getProductDetails(id));
-  //   }, [dispatch, id, isFocused]);
+  useEffect(() => {
+    dispatch(getProductDetails(id));
+  }, [dispatch, id, isFocused]);
 
-  //   useEffect(() => {
-  //     if (product) {
-  //       setName(product.name);
-  //       setDescription(product.description);
-  //       setPrice(String(product.price));
-  //       setStock(String(product.stock));
-  //       setCategory(product.category?.category);
-  //       setCategoryID(product.category?._id);
-  //     }
-  //   }, [product]);
+  useEffect(() => {
+    if (product) {
+      setName(product.name);
+      setDescription(product.description);
+      setPrice(String(product.price));
+      setStock(String(product.stock));
+      setCategory(product.category?.category);
+      setCategoryID(product.category?._id);
+    }
+  }, [product]);
 
   return (
     <>
@@ -71,19 +66,12 @@ const UpdateProduct = ({ navigation, route }) => {
         style={{
           ...defaultStyle,
           backgroundColor: colors.color5,
-          paddingHorizontal: 20,
         }}
       >
         <Header back={true} />
 
         {/* Heading */}
-        <View
-          style={{
-            marginBottom: 20,
-            backgroundColor: colors.color3,
-            borderRadius: 10,
-          }}
-        >
+        <View style={{ marginBottom: 20, paddingTop: 70 }}>
           <Text style={formHeading}>Update Product</Text>
         </View>
 
@@ -108,7 +96,7 @@ const UpdateProduct = ({ navigation, route }) => {
                 onPress={() =>
                   navigation.navigate("ProductImages", {
                     id,
-                    images: [],
+                    images: product.images,
                   })
                 }
                 textColor={colors.color1}
@@ -144,30 +132,17 @@ const UpdateProduct = ({ navigation, route }) => {
                 onChangeText={setStock}
               />
 
-              <TouchableOpacity
+              <Text
                 style={{
+                  ...inputStyling,
+                  textAlign: "center",
+                  textAlignVertical: "center",
                   borderRadius: 3,
-                  height: 50,
-                  marginBottom: 10,
-                  justifyContent: "center",
-                  marginHorizontal: 20,
-                  backgroundColor: colors.color2,
-                  marginTop: 10,
                 }}
                 onPress={() => setVisible(true)}
               >
-                <Text
-                  style={{
-                    textAlignVertical: "center",
-                    backgroundColor: colors.color2,
-                    marginVertical: 10,
-                    marginHorizontal: 20,
-                  }}
-                  color={colors.color3}
-                >
-                  {category.length > 0 ? category : "Select Category"}
-                </Text>
-              </TouchableOpacity>
+                {category}
+              </Text>
 
               <Button
                 textColor={colors.color2}

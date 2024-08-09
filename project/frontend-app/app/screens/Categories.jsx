@@ -14,50 +14,36 @@ import {
 } from "../styles/styles";
 import Header from "../components/Header";
 import { Avatar, Button, TextInput } from "react-native-paper";
-// import { useMessageAndErrorOther, useSetCategories } from "../utils/hooks";
+import { useMessageAndErrorOther, useSetCategories } from "../utils/hooks";
 import { useIsFocused } from "@react-navigation/native";
-// import { useDispatch } from "react-redux";
-// import { addCategory, deleteCategory } from "../../redux/actions/otherAction";
-
-const categories = [
-  { category: "Laptop", _id: "ihqoihdoqiwhd" },
-  { category: "Cat", _id: "wdwdwdwd" },
-  { category: "Tarot", _id: "asasasasas" },
-  { category: "Oracle", _id: "qweqweqweqwe" },
-];
+import { useDispatch } from "react-redux";
+import { addCategory, deleteCategory } from "../../redux/actions/otherAction";
 
 const Categories = ({ navigation }) => {
   const [category, setCategory] = useState("");
-  //   const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   const isFocused = useIsFocused();
-  //   const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  //   useSetCategories(setCategories, isFocused);
+  useSetCategories(setCategories, isFocused);
 
-  //   const loading = useMessageAndErrorOther(dispatch, navigation, "adminpanel");
-  const loading = false;
+  const loading = useMessageAndErrorOther(dispatch, navigation, "AdminPanel");
 
   const deleteHandler = (id) => {
-    // dispatch(deleteCategory(id));
+    dispatch(deleteCategory(id));
   };
 
   const submitHandler = () => {
-    // dispatch(addCategory(category));
+    dispatch(addCategory(category));
   };
 
   return (
-    <View
-      style={{
-        ...defaultStyle,
-        backgroundColor: colors.color5,
-        paddingHorizontal: 35,
-      }}
-    >
+    <View style={{ ...defaultStyle, backgroundColor: colors.color5 }}>
       <Header back={true} />
 
       {/* Heading */}
-      <View style={{ marginBottom: 20, backgroundColor: colors.color3 }}>
+      <View style={{ marginBottom: 20, paddingTop: 70 }}>
         <Text style={formHeading}>Categories</Text>
       </View>
 
@@ -112,7 +98,7 @@ const Categories = ({ navigation }) => {
 
 const CategoryCard = ({ name, id, deleteHandler }) => (
   <View style={styles.cardContainer}>
-    <Text>{name}</Text>
+    <Text style={styles.cardText}>{name}</Text>
     <TouchableOpacity onPress={() => deleteHandler(id)}>
       <Avatar.Icon
         icon={"delete"}
@@ -130,43 +116,24 @@ export default Categories;
 const styles = StyleSheet.create({
   container: {
     padding: 20,
+    elevation: 10,
     borderRadius: 10,
     backgroundColor: colors.color3,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5,
   },
 
   cardContainer: {
     backgroundColor: colors.color2,
-
+    elevation: 5,
     margin: 10,
     padding: 15,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     borderRadius: 10,
-
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5,
   },
   cardText: {
     fontWeight: "600",
     textTransform: "uppercase",
     letterSpacing: 1,
-    color: colors.color3,
   },
 });

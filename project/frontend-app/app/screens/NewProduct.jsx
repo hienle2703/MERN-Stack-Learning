@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
-import { Header, SelectComponent } from "../components";
+import Header from "../components/Header";
 import {
   colors,
   defaultStyle,
@@ -9,15 +9,16 @@ import {
   inputStyling,
 } from "../styles/styles";
 import { Avatar, Button, TextInput } from "react-native-paper";
-// import { useSetCategories, useMessageAndErrorOther } from "../../utils/hooks";
+import SelectComponent from "../components/SelectComponent";
+import { useSetCategories, useMessageAndErrorOther } from "../utils/hooks";
 import { useIsFocused } from "@react-navigation/native";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import mime from "mime";
-// import { createProduct } from "../../redux/actions/otherAction";
+import { createProduct } from "../../redux/actions/otherAction";
 
 const NewProduct = ({ navigation, route }) => {
   const isFocused = useIsFocused();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
 
   const [image, setImage] = useState("");
@@ -29,7 +30,7 @@ const NewProduct = ({ navigation, route }) => {
   const [categoryID, setCategoryID] = useState(undefined);
   const [categories, setCategories] = useState([]);
 
-  // useSetCategories(setCategories, isFocused);
+  useSetCategories(setCategories, isFocused);
 
   const disableBtnCondition =
     !name || !description || !price || !stock || !image;
@@ -48,11 +49,10 @@ const NewProduct = ({ navigation, route }) => {
 
     if (categoryID) myForm.append("category", categoryID);
 
-    // dispatch(createProduct(myForm));
+    dispatch(createProduct(myForm));
   };
 
-  // const loading = useMessageAndErrorOther(dispatch, navigation, "adminpanel");
-  const loading = false;
+  const loading = useMessageAndErrorOther(dispatch, navigation, "AdminPanel");
 
   useEffect(() => {
     if (route.params?.image) setImage(route.params.image);
@@ -64,19 +64,12 @@ const NewProduct = ({ navigation, route }) => {
         style={{
           ...defaultStyle,
           backgroundColor: colors.color5,
-          paddingHorizontal: 20,
         }}
       >
         <Header back={true} />
 
         {/* Heading */}
-        <View
-          style={{
-            marginBottom: 20,
-            backgroundColor: colors.color3,
-            borderRadius: 10,
-          }}
-        >
+        <View style={{ marginBottom: 20, paddingTop: 70 }}>
           <Text style={formHeading}>New Product</Text>
         </View>
 
@@ -158,30 +151,17 @@ const NewProduct = ({ navigation, route }) => {
               onChangeText={setStock}
             />
 
-            <TouchableOpacity
+            <Text
               style={{
+                ...inputStyling,
+                textAlign: "center",
+                textAlignVertical: "center",
                 borderRadius: 3,
-                height: 50,
-                marginBottom: 10,
-                justifyContent: "center",
-                marginHorizontal: 20,
-                backgroundColor: colors.color2,
-                marginTop: 10,
               }}
               onPress={() => setVisible(true)}
             >
-              <Text
-                style={{
-                  textAlignVertical: "center",
-                  backgroundColor: colors.color2,
-                  marginVertical: 10,
-                  marginHorizontal: 20,
-                }}
-                color={colors.color3}
-              >
-                {category.length > 0 ? category : "Select Category"}
-              </Text>
-            </TouchableOpacity>
+              {category}
+            </Text>
 
             <Button
               textColor={colors.color2}
