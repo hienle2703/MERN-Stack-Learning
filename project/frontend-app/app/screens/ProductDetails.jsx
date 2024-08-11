@@ -5,6 +5,7 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
+  SafeAreaView,
 } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import { colors, defaultStyle } from "../styles/styles";
@@ -79,12 +80,13 @@ const ProductDetails = ({ route: { params } }) => {
   }, [dispatch, params.id, isFocused]);
 
   return (
-    <View
+    <SafeAreaView
       style={{
         ...defaultStyle,
         padding: 0,
         backgroundColor: colors.color1,
       }}
+      edges={["top", "left", "right"]}
     >
       <Header back={true} />
 
@@ -180,7 +182,7 @@ const ProductDetails = ({ route: { params } }) => {
           </Button>
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

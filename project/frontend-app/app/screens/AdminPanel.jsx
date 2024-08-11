@@ -52,11 +52,16 @@ const AdminPanel = ({ navigation }) => {
   );
 
   return (
-    <View style={defaultStyle}>
+    <ScrollView
+      style={defaultStyle}
+      contentContainerStyle={{ paddingBottom: 30 }}
+    >
       <Header back={true} />
       {/* Heading */}
-      <View style={{ paddingTop: 70, marginBottom: 20 }}>
-        <Text style={formHeading}>Admin Panel</Text>
+      <View style={{ marginBottom: 20 }}>
+        <Text style={{ ...formHeading, backgroundColor: colors.color3 }}>
+          Admin Panel
+        </Text>
       </View>
 
       {loading ? (
@@ -103,28 +108,26 @@ const AdminPanel = ({ navigation }) => {
 
           <ProductListHeading />
 
-          <ScrollView showsVerticalScrollIndicator={false}>
-            <View>
-              {!loadingDelete &&
-                products.map((item, index) => (
-                  <ProductListItem
-                    navigate={navigation}
-                    deleteHandler={deleteProductHandler}
-                    key={item._id}
-                    id={item._id}
-                    i={index}
-                    price={item.price}
-                    stock={item.stock}
-                    name={item.name}
-                    category={item.category?.category}
-                    imgSrc={item.images[0].url}
-                  />
-                ))}
-            </View>
-          </ScrollView>
+          <View>
+            {!loadingDelete &&
+              products.map((item, index) => (
+                <ProductListItem
+                  navigate={navigation}
+                  deleteHandler={deleteProductHandler}
+                  key={item._id}
+                  id={item._id}
+                  i={index}
+                  price={item.price}
+                  stock={item.stock}
+                  name={item.name}
+                  category={item.category?.category}
+                  imgSrc={item.images[0].url}
+                />
+              ))}
+          </View>
         </>
       )}
-    </View>
+    </ScrollView>
   );
 };
 

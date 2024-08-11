@@ -9,19 +9,19 @@ import {
 } from "../styles/styles";
 import { Button, TextInput } from "react-native-paper";
 import Footer from "../components/Footer";
-// import { useDispatch } from "react-redux";
-// import { forgetPassword } from "../redux/actions/otherAction";
-// import { useMessageAndErrorOther } from "../utils/hooks";
+import { useDispatch } from "react-redux";
+import { forgetPassword } from "../../redux/actions/otherAction";
+import { useMessageAndErrorOther } from "../utils/hooks";
 
 const ForgetPassword = ({ navigation }) => {
   const [email, setEmail] = useState("");
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const loading = useMessageAndErrorOther(dispatch, navigation, "verify");
-  const loading = false;
-  // const submitHandler = () => {
-  //   dispatch(forgetPassword(email));
-  // };
+  const loading = useMessageAndErrorOther(dispatch, navigation, "Verify");
+
+  const submitHandler = () => {
+    dispatch(forgetPassword(email));
+  };
   return (
     <>
       <View style={defaultStyle}>
@@ -44,9 +44,7 @@ const ForgetPassword = ({ navigation }) => {
             textColor={colors.color2}
             disabled={email === ""}
             style={styles.btn}
-            onPress={() => {
-              navigation.navigate("Verify");
-            }}
+            onPress={submitHandler}
           >
             Send OTP
           </Button>
@@ -55,7 +53,7 @@ const ForgetPassword = ({ navigation }) => {
 
           <TouchableOpacity
             activeOpacity={0.8}
-            onPress={() => navigation.navigate("login")}
+            onPress={() => navigation.navigate("Login")}
           >
             <Text style={styles.link}>Log In</Text>
           </TouchableOpacity>

@@ -27,6 +27,7 @@ const Header = ({ back, emptyCart = false }) => {
         <Pressable onPress={() => navigation.goBack()}>
           <Avatar.Icon
             style={{ backgroundColor: colors.color4 }}
+            size={50}
             icon={"arrow-left"}
             color={
               route.name === "ProductDetails" ? colors.color2 : colors.color3
@@ -37,6 +38,7 @@ const Header = ({ back, emptyCart = false }) => {
       <TouchableOpacity onPress={onPressCart}>
         <Avatar.Icon
           style={{ backgroundColor: colors.color4 }}
+          size={50}
           icon={emptyCart ? "delete-outline" : "cart-outline"}
           color={
             route.name === "ProductDetails" ? colors.color2 : colors.color3

@@ -67,10 +67,10 @@ const Home = () => {
   }, [dispatch, searchQuery, category, isFocused]);
 
   return (
-    <>
+    <View style={{ flex: 1, backgroundColor: "white" }}>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 100 }}
+        contentContainerStyle={{ paddingBottom: 100, backgroundColor: "white" }}
       >
         {activeSearch && (
           <SearchModal
@@ -85,6 +85,7 @@ const Home = () => {
             {
               ...defaultStyle,
               paddingHorizontal: 20,
+              flex: 1,
             },
           ]}
         >
@@ -110,11 +111,12 @@ const Home = () => {
               />
             </TouchableOpacity>
           </View>
+
           {/* Categories */}
           <View
             style={{
               flexDirection: "row",
-              height: 80,
+              paddingTop: 20,
             }}
           >
             <ScrollView
@@ -148,28 +150,29 @@ const Home = () => {
             </ScrollView>
           </View>
           {/* Products */}
-          <View style={{ flex: 1 }}>
-            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              {products.map((item, index) => (
-                <ProductCard
-                  stock={item.stock}
-                  name={item.name}
-                  price={item.price}
-                  image={item.images[0]?.url}
-                  addToCartHandler={addToCardHandler}
-                  id={item._id}
-                  key={item._id}
-                  i={index}
-                  navigate={navigate}
-                />
-              ))}
-            </ScrollView>
-          </View>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          >
+            {products.map((item, index) => (
+              <ProductCard
+                stock={item.stock}
+                name={item.name}
+                price={item.price}
+                image={item.images[0]?.url}
+                addToCartHandler={addToCardHandler}
+                id={item._id}
+                key={item._id}
+                i={index}
+                navigate={navigate}
+              />
+            ))}
+          </ScrollView>
         </View>
       </ScrollView>
 
       <Footer activeRoute={"home"} />
-    </>
+    </View>
   );
 };
 
