@@ -60,20 +60,29 @@ const NewProduct = ({ navigation, route }) => {
 
   return (
     <>
-      <View
+      <ScrollView
         style={{
           ...defaultStyle,
           backgroundColor: colors.color5,
+          paddingHorizontal: 20,
         }}
+        contentContainerStyle={{ paddingBottom: 50 }}
       >
         <Header back={true} />
 
         {/* Heading */}
-        <View style={{ marginBottom: 20, paddingTop: 70 }}>
+        <View
+          style={{
+            marginBottom: 20,
+            marginTop: 10,
+            backgroundColor: colors.color3,
+            borderRadius: 10,
+          }}
+        >
           <Text style={formHeading}>New Product</Text>
         </View>
 
-        <ScrollView
+        <View
           style={{
             padding: 20,
             elevation: 10,
@@ -83,102 +92,96 @@ const NewProduct = ({ navigation, route }) => {
         >
           <View
             style={{
-              justifyContent: "center",
-              height: 650,
+              width: 80,
+              height: 80,
+              alignSelf: "center",
+              marginBottom: 20,
             }}
           >
-            <View
-              style={{
-                width: 80,
-                height: 80,
-                alignSelf: "center",
-                marginBottom: 20,
-              }}
-            >
-              <Avatar.Image
-                size={80}
-                style={{
-                  backgroundColor: colors.color1,
-                }}
-                source={{
-                  uri: image ? image : null,
-                }}
-              />
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate("Camera", { newProduct: true })
-                }
-              >
-                <Avatar.Icon
-                  icon={"camera"}
-                  size={30}
-                  color={colors.color3}
-                  style={{
-                    backgroundColor: colors.color2,
-                    position: "absolute",
-                    bottom: 0,
-                    right: -5,
-                  }}
-                />
-              </TouchableOpacity>
-            </View>
-
-            <TextInput
-              {...inputOptions}
-              placeholder="Name"
-              value={name}
-              onChangeText={setName}
-            />
-            <TextInput
-              {...inputOptions}
-              placeholder="Description"
-              value={description}
-              onChangeText={setDescription}
-            />
-
-            <TextInput
-              {...inputOptions}
-              placeholder="Price"
-              keyboardType="number-pad"
-              value={price}
-              onChangeText={setPrice}
-            />
-            <TextInput
-              {...inputOptions}
-              keyboardType="number-pad"
-              placeholder="Stock"
-              value={stock}
-              onChangeText={setStock}
-            />
-
-            <Text
-              style={{
-                ...inputStyling,
-                textAlign: "center",
-                textAlignVertical: "center",
-                borderRadius: 3,
-              }}
-              onPress={() => setVisible(true)}
-            >
-              {category}
-            </Text>
-
-            <Button
-              textColor={colors.color2}
+            <Avatar.Image
+              size={80}
               style={{
                 backgroundColor: colors.color1,
-                margin: 20,
-                padding: 6,
               }}
-              onPress={submitHandler}
-              loading={loading}
-              disabled={disableBtnCondition || loading}
+              source={{
+                uri: image ? image : null,
+              }}
+            />
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("Camera", { newProduct: true })
+              }
             >
-              Create
-            </Button>
+              <Avatar.Icon
+                icon={"camera"}
+                size={30}
+                color={colors.color3}
+                style={{
+                  backgroundColor: colors.color2,
+                  position: "absolute",
+                  bottom: 0,
+                  right: -5,
+                }}
+              />
+            </TouchableOpacity>
           </View>
-        </ScrollView>
-      </View>
+
+          <TextInput
+            {...inputOptions}
+            placeholder="Name"
+            value={name}
+            onChangeText={setName}
+          />
+          <TextInput
+            {...inputOptions}
+            placeholder="Description"
+            value={description}
+            onChangeText={setDescription}
+          />
+
+          <TextInput
+            {...inputOptions}
+            placeholder="Price"
+            keyboardType="number-pad"
+            value={price}
+            onChangeText={setPrice}
+          />
+          <TextInput
+            {...inputOptions}
+            keyboardType="number-pad"
+            placeholder="Stock"
+            value={stock}
+            onChangeText={setStock}
+          />
+
+          <Text
+            style={{
+              ...inputStyling,
+              textAlign: "center",
+              textAlignVertical: "center",
+              borderRadius: 3,
+              paddingVertical: 10,
+            }}
+            onPress={() => setVisible(true)}
+          >
+            {category}
+          </Text>
+
+          <Button
+            textColor={colors.color2}
+            style={{
+              backgroundColor: colors.color1,
+              margin: 20,
+              // padding: 6,
+            }}
+            onPress={submitHandler}
+            loading={loading}
+            disabled={disableBtnCondition || loading}
+          >
+            Create
+          </Button>
+        </View>
+      </ScrollView>
 
       <SelectComponent
         categories={categories}

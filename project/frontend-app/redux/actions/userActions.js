@@ -100,3 +100,49 @@ export const logout = () => async (dispatch) => {
     });
   }
 };
+
+export const getUsers = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: "getUsersRequest",
+    });
+
+    const { data } = await axios.get(`${server}/user/get-all-users`, {
+      withCredentials: true,
+    });
+
+    dispatch({
+      type: "getUsersSuccess",
+      payload: data.users,
+    });
+  } catch (error) {
+    dispatch({
+      type: "getUsersFail",
+      error: error.response.data.message,
+    });
+  }
+};
+
+export const deleteUser = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "deleteUserRequest",
+    });
+
+    const { data } = await axios.delete(`${server}/user/delete-user/${id}`, {
+      withCredentials: true,
+    });
+
+    dispatch({
+      type: "deleteUserSuccess",
+      message: data.message,
+    });
+
+    dispatch(getUsers());
+  } catch (error) {
+    dispatch({
+      type: "deleteUserFail",
+      error: error.response.data.message,
+    });
+  }
+};

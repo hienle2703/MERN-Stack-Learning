@@ -35,7 +35,7 @@ const AdminPanel = ({ navigation }) => {
         break;
 
       default:
-        navigation.navigate("AdminOrders");
+        navigation.navigate("AdminUsers");
         break;
     }
   };
@@ -53,19 +53,23 @@ const AdminPanel = ({ navigation }) => {
 
   return (
     <ScrollView
-      style={defaultStyle}
+      style={{ ...defaultStyle, paddingHorizontal: 20 }}
       contentContainerStyle={{ paddingBottom: 30 }}
     >
       <Header back={true} />
       {/* Heading */}
-      <View style={{ marginBottom: 20 }}>
+      <View style={{ marginVertical: 20 }}>
         <Text style={{ ...formHeading, backgroundColor: colors.color3 }}>
           Admin Panel
         </Text>
       </View>
 
       {loading ? (
-        <Loader />
+        <View
+          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+        >
+          <Loader size={30} />
+        </View>
       ) : (
         <>
           <View
@@ -82,7 +86,7 @@ const AdminPanel = ({ navigation }) => {
             <View
               style={{
                 flexDirection: "row",
-                margin: 10,
+                marginVertical: 10,
                 justifyContent: "space-between",
               }}
             >
@@ -90,18 +94,27 @@ const AdminPanel = ({ navigation }) => {
                 icon={"plus"}
                 text={"Product"}
                 handler={navigationHandler}
+                size={70}
               />
-
+              <ButtonBox
+                icon={"folder"}
+                text={"Category"}
+                handler={navigationHandler}
+                reverse
+                size={70}
+              />
               <ButtonBox
                 icon={"format-list-bulleted-square"}
                 text={"All Orders"}
                 handler={navigationHandler}
-                reverse={true}
+                size={70}
               />
               <ButtonBox
-                icon={"plus"}
-                text={"Category"}
+                icon={"account"}
+                text={"Users"}
                 handler={navigationHandler}
+                reverse
+                size={70}
               />
             </View>
           </View>

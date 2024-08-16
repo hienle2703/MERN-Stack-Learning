@@ -29,54 +29,32 @@ const ProductListItem = ({
             backgroundColor: i % 2 === 0 ? colors.color1 : colors.color3,
           }}
         >
-          <Image
-            source={{
-              uri: imgSrc,
-            }}
-            style={{
-              width: 40,
-              height: 40,
-              resizeMode: "contain",
-            }}
-          />
+          <View style={{ width: "20%" }}>
+            <Image
+              source={{
+                uri: imgSrc,
+              }}
+              style={{
+                width: 40,
+                height: 40,
+                resizeMode: "contain",
+              }}
+            />
+          </View>
 
-          <Text
-            style={{
-              width: 60,
-              color: colors.color2,
-            }}
-            numberOfLines={1}
-          >
-            ₹{price}
+          <Text style={styles.text} numberOfLines={1}>
+            ${price}
           </Text>
 
-          <Text
-            style={{
-              maxWidth: 120,
-              color: colors.color2,
-            }}
-            numberOfLines={1}
-          >
+          <Text style={[styles.text, { width: "25%" }]} numberOfLines={1}>
             {name}
           </Text>
 
-          <Text
-            style={{
-              width: 60,
-              color: colors.color2,
-            }}
-            numberOfLines={1}
-          >
+          <Text style={styles.text} numberOfLines={1}>
             {category}
           </Text>
 
-          <Text
-            style={{
-              width: 40,
-              color: colors.color2,
-            }}
-            numberOfLines={1}
-          >
+          <Text style={[styles.text, { width: "15%" }]} numberOfLines={1}>
             {stock}
           </Text>
         </View>
@@ -103,6 +81,10 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     marginVertical: 10,
+  },
+  text: {
+    width: "20%",
+    color: colors.color2,
   },
 });
 

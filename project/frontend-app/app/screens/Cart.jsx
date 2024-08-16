@@ -59,8 +59,9 @@ const Cart = () => {
         padding: 0,
       }}
     >
-      {/* Header */}
-      <Header back={true} emptyCart={true} />
+      <View style={{ paddingHorizontal: 20 }}>
+        <Header back={true} emptyCart={true} />
+      </View>
 
       {/* Heading */}
       <Heading

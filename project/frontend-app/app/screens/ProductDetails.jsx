@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   SafeAreaView,
+  ScrollView,
 } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import { colors, defaultStyle } from "../styles/styles";
@@ -80,15 +81,16 @@ const ProductDetails = ({ route: { params } }) => {
   }, [dispatch, params.id, isFocused]);
 
   return (
-    <SafeAreaView
+    <ScrollView
       style={{
         ...defaultStyle,
         padding: 0,
         backgroundColor: colors.color1,
       }}
-      edges={["top", "left", "right"]}
     >
-      <Header back={true} />
+      <View style={{ width: "100%", paddingHorizontal: 20 }}>
+        <Header back={true} />
+      </View>
 
       {/* Carousel */}
       <Carousel
@@ -105,7 +107,6 @@ const ProductDetails = ({ route: { params } }) => {
           backgroundColor: colors.color2,
           padding: 35,
           flex: 1,
-          marginTop: -380,
           borderTopLeftRadius: 55,
           borderTopRightRadius: 55,
         }}
@@ -182,7 +183,7 @@ const ProductDetails = ({ route: { params } }) => {
           </Button>
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 

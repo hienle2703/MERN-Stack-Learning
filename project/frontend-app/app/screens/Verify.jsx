@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import React, { useState } from "react";
 import {
   colors,
@@ -18,16 +18,25 @@ const Verify = ({ navigation }) => {
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
-  const loading = useMessageAndErrorOther(dispatch, navigation, "login");
+  const loading = useMessageAndErrorOther(dispatch, navigation, "Login");
 
   const submitHandler = () => {
     dispatch(resetPassword(otp, password));
   };
   return (
     <>
-      <View style={defaultStyle}>
+      <ScrollView
+        style={{ ...defaultStyle, paddingHorizontal: 20 }}
+        contentContainerStyle={{ paddingBottom: 20 }}
+      >
         {/* Heading */}
-        <View style={{ marginBottom: 20 }}>
+        <View
+          style={{
+            marginBottom: 20,
+            backgroundColor: colors.color3,
+            borderRadius: 10,
+          }}
+        >
           <Text style={formHeading}>Reset Password</Text>
         </View>
 
@@ -63,12 +72,12 @@ const Verify = ({ navigation }) => {
 
           <TouchableOpacity
             activeOpacity={0.8}
-            onPress={() => navigation.navigate("forgetpassword")}
+            onPress={() => navigation.navigate("ForgetPassword")}
           >
             <Text style={styles.link}>Resend OTP</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </ScrollView>
 
       <Footer activeRoute="profile" />
     </>

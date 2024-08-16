@@ -56,7 +56,6 @@ const SearchModal = ({
       <ScrollView>
         <View style={{ paddingVertical: 40, paddingHorizontal: 10 }}>
           {products.map((item, index) => {
-            console.log(item);
             return (
               <SearchItem
                 key={item._id}

@@ -9,14 +9,15 @@ const ButtonBox = ({
   handler,
   reverse = false,
   loading = false,
+  size = 80,
 }) => {
   return (
     <TouchableOpacity
       activeOpacity={1}
       style={{
         backgroundColor: reverse ? colors.color1 : colors.color3,
-        height: 80,
-        width: 80,
+        height: size,
+        width: size,
         borderRadius: 20,
         alignItems: "center",
       }}
@@ -24,7 +25,7 @@ const ButtonBox = ({
       disabled={loading}
     >
       <Avatar.Icon
-        size={50}
+        size={size - 30}
         color={colors.color2}
         style={{ backgroundColor: reverse ? colors.color1 : colors.color3 }}
         icon={icon}
@@ -33,6 +34,7 @@ const ButtonBox = ({
         style={{
           color: colors.color2,
           textAlign: "center",
+          fontSize: 12
         }}
       >
         {text}

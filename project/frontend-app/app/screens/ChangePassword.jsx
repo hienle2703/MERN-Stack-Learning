@@ -25,12 +25,12 @@ const ChangePassword = () => {
     setOldPassword("");
     setNewPassword("");
   };
-  
+
   return (
     <ScrollView
       style={[
         defaultStyle,
-        { marginHorizontal: 20, backgroundColor: colors.color2 },
+        { paddingHorizontal: 20, backgroundColor: colors.color2 },
       ]}
       contentContainerStyle={{ paddingBottom: 50 }}
     >
@@ -41,6 +41,7 @@ const ChangePassword = () => {
           marginBottom: 20,
           backgroundColor: colors.color3,
           borderRadius: 10,
+          marginTop: 10,
         }}
       >
         <Text style={formHeading}>Change Password</Text>

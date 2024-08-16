@@ -46,16 +46,27 @@ const ProductImages = ({ navigation, route }) => {
   }, [route.params]);
 
   return (
-    <View
+    <ScrollView
       style={{
         ...defaultStyle,
         backgroundColor: colors.color5,
+        paddingHorizontal: 20,
+      }}
+      contentContainerStyle={{
+        paddingBottom: 50,
       }}
     >
       <Header back={true} />
 
       {/* Heading */}
-      <View style={{ marginBottom: 20, paddingTop: 70 }}>
+      <View
+        style={{
+          marginBottom: 20,
+          marginTop: 10,
+          backgroundColor: colors.color3,
+          borderRadius: 10,
+        }}
+      >
         <Text style={formHeading}>Images</Text>
       </View>
 
@@ -68,7 +79,6 @@ const ProductImages = ({ navigation, route }) => {
           style={{
             backgroundColor: colors.color2,
             padding: 40,
-            minHeight: 400,
           }}
         >
           {images.map((i) => (
@@ -137,7 +147,7 @@ const ProductImages = ({ navigation, route }) => {
           Add
         </Button>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

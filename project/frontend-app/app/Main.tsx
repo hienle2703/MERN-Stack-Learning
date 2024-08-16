@@ -24,6 +24,7 @@ import AdminOrders from "./screens/AdminOrders";
 import UpdateProduct from "./screens/UpdateProduct";
 import NewProduct from "./screens/NewProduct";
 import ProductImages from "./screens/ProductImages";
+import { UserControlScreen } from "./screens/UserControl";
 
 import Camera from "./screens/Camera";
 import { useDispatch } from "react-redux";
@@ -66,6 +67,7 @@ const Main = () => {
           <Stack.Screen name="UpdateProduct" component={UpdateProduct} />
           <Stack.Screen name="NewProduct" component={NewProduct} />
           <Stack.Screen name="ProductImages" component={ProductImages} />
+          <Stack.Screen name="AdminUsers" component={UserControlScreen} />
 
           <Stack.Screen name="Camera" component={Camera} />
         </Stack.Group>

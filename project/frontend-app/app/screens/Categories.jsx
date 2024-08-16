@@ -39,15 +39,31 @@ const Categories = ({ navigation }) => {
   };
 
   return (
-    <View style={{ ...defaultStyle, backgroundColor: colors.color5 }}>
+    <ScrollView
+      style={{
+        ...defaultStyle,
+        backgroundColor: colors.color5,
+        paddingHorizontal: 20,
+      }}
+      contentContainerStyle={{
+        paddingBottom: 50,
+      }}
+    >
       <Header back={true} />
 
       {/* Heading */}
-      <View style={{ marginBottom: 20, paddingTop: 70 }}>
+      <View
+        style={{
+          marginBottom: 20,
+          marginTop: 10,
+          backgroundColor: colors.color3,
+          borderRadius: 10,
+        }}
+      >
         <Text style={formHeading}>Categories</Text>
       </View>
 
-      <ScrollView
+      <View
         style={{
           marginBottom: 20,
         }}
@@ -68,7 +84,7 @@ const Categories = ({ navigation }) => {
             />
           ))}
         </View>
-      </ScrollView>
+      </View>
 
       <View style={styles.container}>
         <TextInput
@@ -92,7 +108,7 @@ const Categories = ({ navigation }) => {
           Add
         </Button>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

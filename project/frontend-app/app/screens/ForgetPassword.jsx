@@ -24,10 +24,12 @@ const ForgetPassword = ({ navigation }) => {
   };
   return (
     <>
-      <View style={defaultStyle}>
+      <View style={{ ...defaultStyle, paddingHorizontal: 20 }}>
         {/* Heading */}
         <View style={{ marginBottom: 20 }}>
-          <Text style={formHeading}>Forget Password</Text>
+          <Text style={{ ...formHeading, backgroundColor: colors.color3 }}>
+            Forget Password
+          </Text>
         </View>
 
         <View style={styles.container}>

@@ -62,23 +62,29 @@ const UpdateProduct = ({ navigation, route }) => {
 
   return (
     <>
-      <View
+      <ScrollView
         style={{
           ...defaultStyle,
           backgroundColor: colors.color5,
+          paddingHorizontal: 20,
         }}
+        contentContainerStyle={{ paddingBottom: 50 }}
       >
-        <Header back={true} />
-
-        {/* Heading */}
-        <View style={{ marginBottom: 20, paddingTop: 70 }}>
+        <Header back />
+        <View
+          style={{
+            marginBottom: 20,
+            marginTop: 10,
+            backgroundColor: colors.color3,
+            borderRadius: 10,
+          }}
+        >
           <Text style={formHeading}>Update Product</Text>
         </View>
-
         {loading ? (
-          <Loader />
+          <Loader size={50} />
         ) : (
-          <ScrollView
+          <View
             style={{
               padding: 20,
               elevation: 10,
@@ -89,7 +95,6 @@ const UpdateProduct = ({ navigation, route }) => {
             <View
               style={{
                 justifyContent: "center",
-                height: 650,
               }}
             >
               <Button
@@ -103,7 +108,6 @@ const UpdateProduct = ({ navigation, route }) => {
               >
                 Manage Images
               </Button>
-
               <TextInput
                 {...inputOptions}
                 placeholder="Name"
@@ -116,7 +120,6 @@ const UpdateProduct = ({ navigation, route }) => {
                 value={description}
                 onChangeText={setDescription}
               />
-
               <TextInput
                 {...inputOptions}
                 placeholder="Price"
@@ -131,7 +134,6 @@ const UpdateProduct = ({ navigation, route }) => {
                 keyboardType="number-pad"
                 onChangeText={setStock}
               />
-
               <Text
                 style={{
                   ...inputStyling,
@@ -143,7 +145,6 @@ const UpdateProduct = ({ navigation, route }) => {
               >
                 {category}
               </Text>
-
               <Button
                 textColor={colors.color2}
                 style={{
@@ -158,10 +159,9 @@ const UpdateProduct = ({ navigation, route }) => {
                 Update
               </Button>
             </View>
-          </ScrollView>
+          </View>
         )}
-      </View>
-
+      </ScrollView>
       <SelectComponent
         categories={categories}
         setCategoryID={setCategoryID}

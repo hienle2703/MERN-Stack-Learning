@@ -36,6 +36,8 @@ const Footer = ({ activeRoute = "home" }) => {
     },
   };
 
+  console.log(Keyboard.isVisible(), '=========== is visible')
+
   return (
     loading === false &&
     !Keyboard.isVisible() && (

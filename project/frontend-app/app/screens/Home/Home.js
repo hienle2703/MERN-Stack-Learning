@@ -6,6 +6,7 @@ import {
   ProductCard,
   Footer,
   Heading,
+  Loader,
 } from "../../components";
 import { colors, defaultStyle } from "../../styles/styles";
 import { Avatar, Button } from "react-native-paper";
@@ -25,7 +26,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const isFocused = useIsFocused();
 
-  const { products } = useSelector((state) => state.product);
+  const { products, loading } = useSelector((state) => state.product);
 
   const categoryButtonHandler = (id) => {
     setCategory(id);
@@ -84,93 +85,112 @@ const Home = () => {
           style={[
             {
               ...defaultStyle,
-              paddingHorizontal: 20,
               flex: 1,
+              backgroundColor: "white",
             },
           ]}
         >
-          <Header />
-          {/* Heading Row */}
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            {/* Heading */}
-            <Heading text1="Our" text2="Products" />
-
-            {/* Search Bar */}
-            <TouchableOpacity onPress={() => setActiveSearch((prev) => !prev)}>
-              <Avatar.Icon
-                icon={"magnify"}
-                size={50}
-                color={"gray"}
-                style={{ backgroundColor: colors.color2, elevation: 12 }}
-              />
-            </TouchableOpacity>
-          </View>
-
-          {/* Categories */}
-          <View
-            style={{
-              flexDirection: "row",
-              paddingTop: 20,
-            }}
-          >
-            <ScrollView
-              horizontal
-              contentContainerStyle={{
+          <View style={{ paddingHorizontal: 20 }}>
+            <Header />
+            {/* Heading Row */}
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
                 alignItems: "center",
               }}
-              showsHorizontalScrollIndicator={false}
             >
-              {categories.map((item, index) => (
-                <Button
-                  key={item._id}
-                  style={{
-                    backgroundColor:
-                      category === item._id ? colors.color1 : colors.color5,
-                    borderRadius: 100,
-                    margin: 5,
-                  }}
-                  onPress={() => categoryButtonHandler(item._id)}
-                >
-                  <Text
-                    style={{
-                      fontSize: 12,
-                      color: category === item._id ? colors.color2 : "gray",
-                    }}
-                  >
-                    {item.category}
-                  </Text>
-                </Button>
-              ))}
-            </ScrollView>
+              {/* Heading */}
+              <Heading text1="Our" text2="Products" />
+
+              {/* Search Bar */}
+              <TouchableOpacity
+                onPress={() => setActiveSearch((prev) => !prev)}
+              >
+                <Avatar.Icon
+                  icon={"magnify"}
+                  size={50}
+                  color={"gray"}
+                  style={{ backgroundColor: colors.color2, elevation: 12 }}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
-          {/* Products */}
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-          >
-            {products.map((item, index) => (
-              <ProductCard
-                stock={item.stock}
-                name={item.name}
-                price={item.price}
-                image={item.images[0]?.url}
-                addToCartHandler={addToCardHandler}
-                id={item._id}
-                key={item._id}
-                i={index}
-                navigate={navigate}
-              />
-            ))}
-          </ScrollView>
+          {loading ? (
+            <View
+              style={{
+                height: 100,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Loader size={50} />
+            </View>
+          ) : (
+            <>
+              {/* Categories */}
+              <View
+                style={{
+                  flexDirection: "row",
+                  paddingTop: 20,
+                  paddingLeft: 20,
+                  backgroundColor: "white",
+                }}
+              >
+                <ScrollView
+                  horizontal
+                  contentContainerStyle={{
+                    alignItems: "center",
+                  }}
+                  showsHorizontalScrollIndicator={false}
+                >
+                  {categories.map((item, index) => (
+                    <Button
+                      key={item._id}
+                      style={{
+                        backgroundColor:
+                          category === item._id ? colors.color1 : colors.color5,
+                        borderRadius: 100,
+                        margin: 5,
+                      }}
+                      onPress={() => categoryButtonHandler(item._id)}
+                    >
+                      <Text
+                        style={{
+                          fontSize: 12,
+                          color: category === item._id ? colors.color2 : "gray",
+                        }}
+                      >
+                        {item.category}
+                      </Text>
+                    </Button>
+                  ))}
+                </ScrollView>
+              </View>
+              {/* Products */}
+              <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={{ paddingLeft: 20, paddingBottom: 20 }}
+              >
+                {products.map((item, index) => (
+                  <ProductCard
+                    stock={item.stock}
+                    name={item.name}
+                    price={item.price}
+                    image={item.images[0]?.url}
+                    addToCartHandler={addToCardHandler}
+                    id={item._id}
+                    key={item._id}
+                    i={index}
+                    navigate={navigate}
+                  />
+                ))}
+              </ScrollView>
+            </>
+          )}
         </View>
       </ScrollView>
-
       <Footer activeRoute={"home"} />
     </View>
   );

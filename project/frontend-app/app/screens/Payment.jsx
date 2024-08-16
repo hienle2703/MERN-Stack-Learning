@@ -116,7 +116,7 @@ const Payment = ({ navigation, route }) => {
   return loaderLoading ? (
     <Loader />
   ) : (
-    <View style={defaultStyle}>
+    <View style={{ ...defaultStyle, paddingHorizontal: 20 }}>
       <Header back={true} />
       <Heading
         containerStyle={{

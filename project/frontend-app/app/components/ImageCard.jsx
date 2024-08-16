@@ -12,7 +12,7 @@ const ImageCard = ({ src, id, deleteHandler }) => {
         }}
         style={{
           width: "100%",
-          height: "80%",
+          aspectRatio: 1,
           resizeMode: "contain",
         }}
       />
@@ -22,6 +22,7 @@ const ImageCard = ({ src, id, deleteHandler }) => {
           icon={"delete"}
           style={{
             backgroundColor: colors.color1,
+            marginTop: 10,
           }}
         />
       </TouchableOpacity>
@@ -39,6 +40,5 @@ const styles = StyleSheet.create({
     padding: 15,
     alignItems: "center",
     borderRadius: 10,
-    height: 300,
   },
 });
